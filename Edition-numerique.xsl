@@ -271,7 +271,7 @@
                     <div style="height: 50px;"/>
                     <div class="offset-md-2 col-md-8 text-center">
                         <p class="lead container">Ce site a été fait dans le cadre de l'évaluation
-                            XSLT de l'École nationale des chartes. vous trouverez le fichier XML TEI
+                            XSLT de l'École nationale des chartes. Vous trouverez le fichier XML TEI
                             de départ, le fichier de transformation XSL ainsi que le code HTML de
                             sortie sur <a href="https://github.com/Segolene-Albouy/Edition_numerique_saint-Sixte">GitHub</a>. De plus, il est possible de trouvez
                             les informations relatives à la mise en place de facsimilé interactif
@@ -305,7 +305,7 @@
         </xsl:variable>
 
         <nav class="navbar navbar-expand-md navbar-dark bg-dark justify-content-between">
-            <a class="navbar-brand" href="{$path-accueil}">Accueil</a>
+            <a class="navbar-brand" href="/">Accueil</a>
 
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -329,6 +329,16 @@
     
     <!-- HEADER HTML -->
     <xsl:template name="meta-header">
+        <xsl:variable name="titre">
+            <xsl:value-of select="//titleStmt/title"/>
+        </xsl:variable>
+        <xsl:variable name="cote">
+            <xsl:value-of select="//msIdentifier/idno"/>
+        </xsl:variable>
+        <xsl:variable name="bibli">
+            <xsl:value-of select="//msIdentifier/repository"/>
+        </xsl:variable>
+        
         <link rel="stylesheet"
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -336,7 +346,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta charset="UTF-8"/>
         <meta name="author" content="Ségolène &amp; Timothé ALBOUY"/>
-        <meta name="description" content="Édition numérique de la vie de Saint Sixte dans le manuscrit Français 412 de la Bibliothèque de France"/>
+        <meta name="description" content="Édition numérique de la {$titre} dans le manuscrit {$cote} de la {$bibli}"/>
         <meta name="keywords" content="XSLT,XML,TEI"/>
     </xsl:template>
 
