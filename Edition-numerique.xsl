@@ -10,7 +10,7 @@
     <xsl:template match="/">
         <!-- DEFINITION DES VARIABLES DE NOMS DE FICHIERS DE SORTIE -->
         <xsl:variable name="path-accueil">
-            <xsl:text>accueil.html</xsl:text>
+            <xsl:text>index.html</xsl:text>
         </xsl:variable>
         <xsl:variable name="path-facsimile">
             <xsl:text>facsimile-interactif.html</xsl:text>
@@ -46,11 +46,7 @@
         <xsl:result-document href="{$path-accueil}" method="html" indent="yes">
             <html>
                 <head>
-                    <link rel="stylesheet"
-                        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-                        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-                        crossorigin="anonymous"/>
-                    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+                    <xsl:call-template name="meta-header"/>
                     <title>
                         <xsl:value-of select="concat($titre, ' | ', 'Accueil')"/>
                     </title>
@@ -70,7 +66,7 @@
                                 <xsl:value-of select="$titre"/>
                             </h1>
                             <p class="lead">
-                                <xsl:value-of select="//msItem/incipit"/>
+                                <em><xsl:value-of select="//msItem/incipit"/></em>
                             </p>
                         </div>
                         <div class="offset-md-3 col-md-6 offset-sm-2 col-sm-8 text-center">
@@ -113,11 +109,7 @@
         <xsl:result-document href="{$path-textometrie}" method="html" indent="yes">
             <html>
                 <head>
-                    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-                    <link rel="stylesheet"
-                        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-                        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-                        crossorigin="anonymous"/>
+                    <xsl:call-template name="meta-header"/>
                     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"/>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"/>
                     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"/>
@@ -168,15 +160,7 @@
         <xsl:result-document href="{$path-facsimile}" method="html" indent="yes">
             <html>
                 <head>
-                    <meta charset="UTF-8"/>
-                    <meta name="title" content="Inter·faxim"/>
-                    <meta name="author" content="Ségolène &amp; Timothé ALBOUY"/>
-                    <meta name="description" content="Interactive facsimile"/>
-                    <meta name="keywords" content="XSLT,XML,TEI"/>
-                    <link rel="stylesheet"
-                        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-                        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-                        crossorigin="anonymous"/>
+                    <xsl:call-template name="meta-header"/>
                     <title>
                         <xsl:value-of select="concat($titre, ' | ', 'Facsimile interactif')"/>
                     </title>
@@ -241,11 +225,7 @@
         <xsl:result-document href="{$path-notice}" method="html" indent="yes">
             <html>
                 <head>
-                    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-                    <link rel="stylesheet"
-                        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-                        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-                        crossorigin="anonymous"/>
+                    <xsl:call-template name="meta-header"/>
                     <title>
                         <xsl:value-of select="concat($titre, ' | ', 'Notice bibliographique')"/>
                     </title>
@@ -263,11 +243,7 @@
         <xsl:result-document href="{$path-biblio}" method="html" indent="yes">
             <html>
                 <head>
-                    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-                    <link rel="stylesheet"
-                        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-                        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-                        crossorigin="anonymous"/>
+                    <xsl:call-template name="meta-header"/>
                     <title>
                         <xsl:value-of select="concat($titre, ' | ', 'Références bibliographiques')"/>
                     </title>
@@ -285,11 +261,7 @@
         <xsl:result-document href="{$path-a-propos}">
             <html>
                 <head>
-                    <link rel="stylesheet"
-                        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-                        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-                        crossorigin="anonymous"/>
-                    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+                    <xsl:call-template name="meta-header"/>
                     <title>
                         <xsl:value-of select="concat($titre, ' | ', 'À propos')"/>
                     </title>
@@ -314,7 +286,7 @@
     <!-- NAVBAR -->
     <xsl:template name="navbar">
         <xsl:variable name="path-accueil">
-            <xsl:text>accueil.html</xsl:text>
+            <xsl:text>index.html</xsl:text>
         </xsl:variable>
         <xsl:variable name="path-facsimile">
             <xsl:text>facsimile-interactif.html</xsl:text>
@@ -353,6 +325,19 @@
                 </li>
             </ul>
         </nav>
+    </xsl:template>
+    
+    <!-- HEADER HTML -->
+    <xsl:template name="meta-header">
+        <link rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="UTF-8"/>
+        <meta name="author" content="Ségolène &amp; Timothé ALBOUY"/>
+        <meta name="description" content="Édition numérique de la vie de Saint Sixte dans le manuscrit Français 412 de la Bibliothèque de France"/>
+        <meta name="keywords" content="XSLT,XML,TEI"/>
     </xsl:template>
 
     <!-- Tentative pour l'affichage du texte modernisé à appeler dans les templates -->
