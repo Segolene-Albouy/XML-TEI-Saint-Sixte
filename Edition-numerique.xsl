@@ -674,9 +674,11 @@
                 <xsl:value-of
                     select="ancestor-or-self::seg/[replace(@facs, '#l', '')]"/>
             </xsl:variable>
-            <!--<xsl:variable name="last-line">
-                <xsl:value-of select="ancestor::TEI//seg[@facs = concat('#', $first-line)]/following-sibling::*/[replace(@facs, '#l', '')]"/>
-            </xsl:variable>-->
+            <xsl:variable name="last-line">
+                <xsl:value-of>
+                    <xsl:apply-templates select="." mode="line-number"/>
+                </xsl:value-of>
+            </xsl:variable>
             
             <xsl:text>« </xsl:text>
             <xsl:apply-templates select="." mode="texte-modernise"/>
@@ -684,11 +686,25 @@
             
             <span class="badge badge-light">
                 <xsl:value-of
-                    select="concat('(l. ', $first-line, ' - ', '...', ')')"
+                    select="concat('(l. ', $first-line, ' - ', $last-line, ')')"
                 />
             </span>
             
         </p>
+    </xsl:template>
+    
+    <xsl:template match="TEI//body//said" mode="line-number">
+        <xsl:choose>
+            <xsl:when test="./@next">
+                <xsl:variable name="next-said-id">
+                    <xsl:value-of select="replace(./@next, '#', '')"/>
+                </xsl:variable>
+                <xsl:apply-templates select="ancestor::TEI//body//said[@xml:id=$next-said-id]" mode="line-number"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="ancestor-or-self::seg/replace(@facs, '#l', '')"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="TEI//body//said" mode="texte-modernise">
@@ -715,26 +731,12 @@
             </xsl:otherwise>
         </xsl:choose>
         
-        <!--<!-\- si said n'a pas d'attribut @prev, càd si c'est la première partie de la prise de parole -\->
-        <xsl:if test="not(./@prev)">
-            <xsl:variable name="first-line">
-                <xsl:value-of select="ancestor-or-self::seg/replace(@facs, '#l', '')"/>
-            </xsl:variable>
-        </xsl:if>-->
-        
-       <xsl:choose>
-            <xsl:when test="./@next">
+            <xsl:if test="./@next">
                 <xsl:variable name="next-said-id">
                     <xsl:value-of select="replace(./@next, '#', '')"/>
                 </xsl:variable>
                 <xsl:apply-templates select="ancestor::TEI//body//said[@xml:id=$next-said-id]" mode="texte-modernise"/>
-            </xsl:when>
-           <!--<xsl:otherwise>
-               <xsl:variable name="last-line">
-                   <xsl:value-of select="ancestor-or-self::seg/replace(@facs, '#l', '')"/>
-               </xsl:variable>
-           </xsl:otherwise>-->
-        </xsl:choose>
+            </xsl:if>
     </xsl:template>
 
     
