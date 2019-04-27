@@ -438,16 +438,23 @@
         </xsl:if>
     </xsl:template>
     
+    <xsl:template match="TEI//body//persName" mode="texte-modernise">
+        <xsl:value-of
+            select="
+            text() |
+            .//reg/text() |
+            .//corr/text()|
+            .//expan//text() |
+            .//seg//text() |
+            .//g/text()"
+        />
+    </xsl:template>
+    
     <xsl:template match="TEI//body//persName" mode="perso">
         <xsl:variable name="occurrence">
-            <xsl:value-of
-                select="
-                text() |
-                .//reg/text() |
-                .//expan//text() |
-                .//corr//text() |
-                .//g/text()"
-            />
+            <xsl:value-of>
+                <xsl:apply-templates select="." mode="texte-modernise"/>
+            </xsl:value-of>
         </xsl:variable>
         
         <!-- premiere partie du mot à cheval sur 2 lignes -->
@@ -455,13 +462,11 @@
             <xsl:value-of select="replace($occurrence, '-', '')"/>
         </xsl:variable>
         
-        <!-- seconde partie mentionnée dans l'attribut next -->
-        <xsl:variable name="nom-part1-2">
-            <xsl:value-of select="replace(@next, '#', '')"/>
+        <xsl:variable name="nom-part2-id">
+            <xsl:value-of select="replace(./@next, '#', '')"/>
         </xsl:variable>
         <xsl:variable name="nom-part2">
-            <!-- il y avait deux fois le même identifiant, donc j'avais mis un 2 (ce n'est pas très propre) -->
-            <xsl:value-of select="replace($nom-part1-2, '2', '')"/>
+            <xsl:value-of select="ancestor::TEI//body//persName[@xml:id = $nom-part2-id]"/>
         </xsl:variable>
         
         <xsl:variable name="ligne">
@@ -552,16 +557,23 @@
         </div>
     </xsl:template>
     
-    <xsl:template match="TEI//body//placeName" mode="place">
-        <xsl:variable name="occurrence">
+    <xsl:template match="TEI//body//placeName" mode="texte-modernise">
             <xsl:value-of
                 select="
                 text() |
                 .//reg/text() |
                 .//corr/text()|
                 .//expan//text() |
+                .//seg//text() |
                 .//g/text()"
             />
+    </xsl:template>
+    
+    <xsl:template match="TEI//body//placeName" mode="place">
+        <xsl:variable name="occurrence">
+            <xsl:value-of>
+                <xsl:apply-templates select="." mode="texte-modernise"/>
+            </xsl:value-of>
         </xsl:variable>
         
         <!-- premiere partie du mot à cheval sur 2 lignes -->
@@ -569,9 +581,11 @@
             <xsl:value-of select="replace($occurrence, '-', '')"/>
         </xsl:variable>
         
-        <!-- seconde partie mentionnée dans l'attribut next -->
+        <xsl:variable name="nom-part2-id">
+            <xsl:value-of select="replace(./@next, '#', '')"/>
+        </xsl:variable>
         <xsl:variable name="nom-part2">
-            <xsl:value-of select="replace(@next, '#', '')"/>
+            <xsl:value-of select="ancestor::TEI//body//persName[@xml:id = $nom-part2-id]"/>
         </xsl:variable>
         
         <xsl:variable name="ligne">
