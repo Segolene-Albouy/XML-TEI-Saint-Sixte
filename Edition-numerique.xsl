@@ -233,7 +233,7 @@
                 <body>
                     <xsl:call-template name="navbar"/>
                     <div class="container">
-                        <xsl:call-template name="notice"/>
+                            <xsl:call-template name="notice"/>
                     </div>
                 </body>
             </html>
@@ -251,7 +251,10 @@
                 <body>
                     <xsl:call-template name="navbar"/>
                     <div class="container">
-                        <xsl:call-template name="biblio"/>
+                        <div class="col-md-2"/>
+                        <div class="col-md-8">
+                            <xsl:call-template name="biblio"/>
+                        </div>
                     </div>
                 </body>
             </html>
@@ -350,11 +353,30 @@
         <meta name="keywords" content="XSLT,XML,TEI"/>
     </xsl:template>
 
-    <!-- Tentative pour l'affichage du texte modernisé à appeler dans les templates -->
-    <xsl:template match="TEI//body//seg" mode="texte-modernise">
-        <xsl:apply-templates select="seg//abbr|seg//sic|seg//orig" mode="texte-modernise"/>
+    <!-- Séparateur de liste -->
+    <xsl:template name="point-virgule">
+        <xsl:choose>
+            <xsl:when test="position() != last()">
+                <xsl:text>, </xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>.</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
-    <xsl:template match="seg//abbr|seg//sic|seg//orig" mode="texte-modernise"/>
+
+    <xsl:template match="TEI//body//seg" mode="texte-modernise">
+        <xsl:value-of select="./text() |
+            .//reg/text() |
+            .//expan/text() |
+            .//corr/text() |
+            .//persName/text() |
+            .//said/text() |
+            .//placeName/text() |
+            .//seg//text() |
+            .//g/text()|
+            .//roleName/text()"/>
+    </xsl:template>
     
     <!-- OCCURRENCES PERSONNAGES -->
     <xsl:template name="textometrie-perso">
@@ -439,25 +461,14 @@
         
         <xsl:variable name="ligne">
             <!-- ancestor-or-self:: permet d'avoir le plus proche parent correspondant à ce noeud -->
-            <xsl:value-of
-                select="
-                ancestor-or-self::seg/text() |
-                ancestor-or-self::seg//reg/text() |
-                ancestor-or-self::seg//expan/text() |
-                ancestor-or-self::seg//corr/text() |
-                ancestor-or-self::seg//said/text() |
-                ancestor-or-self::seg//persName/text() |
-                ancestor-or-self::seg//placeName/text() |
-                ancestor-or-self::seg//roleName/text() |
-                ancestor-or-self::seg//seg//text() |
-                ancestor-or-self::seg//g/text()"
-            />
+            <xsl:value-of>
+                <xsl:apply-templates select=" ancestor-or-self::seg" mode="texte-modernise"/>
+            </xsl:value-of>
         </xsl:variable>
         
-        <!-- Correction d'affichage assez moche que je n'explique pas -->
+        <!-- Correction d'un bug que je n'explique pas bloquant l'affichage -->
         <xsl:variable name="ligne-bug">
-            <xsl:value-of
-                select="replace($ligne, '&#xA;                  ', ' ')"/>
+            <xsl:value-of select="replace($ligne, '&#xA;                  ', ' ')"/>
         </xsl:variable>
         
         <xsl:variable name="numero-ligne">
@@ -480,12 +491,7 @@
             </xsl:otherwise>
         </xsl:choose>
         
-        <xsl:if test="position() != last()">
-            <xsl:text>, </xsl:text>
-        </xsl:if>
-        <xsl:if test="position() = last()">
-            <xsl:text>.</xsl:text>
-        </xsl:if>
+        <xsl:call-template name="point-virgule"/>
         
     </xsl:template>
 
@@ -564,20 +570,9 @@
         </xsl:variable>
         
         <xsl:variable name="ligne">
-            <!-- ancestor-or-self:: permet d'avoir le plus proche parent correspondant à ce noeud -->
-            <xsl:value-of
-                select="
-                ancestor-or-self::seg/text() |
-                ancestor-or-self::seg//reg/text() |
-                ancestor-or-self::seg//expan/text() |
-                ancestor-or-self::seg//corr/text() |
-                ancestor-or-self::seg//said/text() |
-                ancestor-or-self::seg//persName/text() |
-                ancestor-or-self::seg//placeName/text() |
-                ancestor-or-self::seg//roleName/text() |
-                ancestor-or-self::seg//seg//text() |
-                ancestor-or-self::seg//g/text()"
-            />
+            <xsl:value-of>
+                <xsl:apply-templates select=" ancestor-or-self::seg" mode="texte-modernise"/>
+            </xsl:value-of>
         </xsl:variable>
         
         <!-- Correction d'un bug bloquant l'affichage -->
@@ -605,13 +600,7 @@
             </xsl:otherwise>
         </xsl:choose>
         
-        <xsl:if test="position() != last()">
-            <!-- si l'élément n'est pas le dernier, on met une virgule -->
-            <xsl:text>, </xsl:text>
-        </xsl:if>
-        <xsl:if test="position() = last()">
-            <xsl:text>.</xsl:text>
-        </xsl:if>
+        <xsl:call-template name="point-virgule"/>
     </xsl:template>
 
     <!-- OCCURRENCES PRISE DE PAROLES -->
@@ -668,59 +657,19 @@
                     select="ancestor-or-self::seg/[replace(@facs, '#l', '')]"/>
             </xsl:variable>
             
-            <xsl:variable name="begin-said">
-                <xsl:value-of
-                    select="
-                    ./text() |
-                    .//reg/text() |
-                    .//expan/text() |
-                    .//corr/text() |
-                    .//persName/text() |
-                    .//placeName/text() |
-                    .//seg/text() |
-                    .//g/text()|
-                    .//roleName/text()"
-                />
-            </xsl:variable>
-            
             <xsl:choose>
                 <xsl:when test="./@next">
                     <!-- Si la prise de parole a un attribut next : càd, si elle se poursuit sur plusieurs lignes -->
                     
-                    <xsl:value-of select="replace($begin-said, '-', '')"/>
-                    
-                    <xsl:choose>
-                        <!-- si la première partie de la prise de parole fini par un mot tronqué, on ne met pas d'espace entre les propositions -->
-                        <xsl:when test="contains($begin-said, '-')">
-                            <xsl:text/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:text> </xsl:text>
-                        </xsl:otherwise>
-                    </xsl:choose>
+                    <xsl:apply-templates select="." mode="texte-modernise"/>
                     
                     <xsl:variable name="next-said-id">
-                        <xsl:value-of select="./@next"/>
-                    </xsl:variable>
-                    <xsl:variable name="next-said-text">
-                        <xsl:value-of
-                            select="
-                            ancestor::body//said[@xml:id = replace($next-said-id, '#', '')]/text() |
-                            ancestor::body//said[@xml:id = replace($next-said-id, '#', '')]//reg/text() |
-                            ancestor::body//said[@xml:id = replace($next-said-id, '#', '')]//expan/text() |
-                            ancestor::body//said[@xml:id = replace($next-said-id, '#', '')]//corr/text() |
-                            ancestor::body//said[@xml:id = replace($next-said-id, '#', '')]//g/text() |
-                            ancestor::body//said[@xml:id = replace($next-said-id, '#', '')]//seg/text() |
-                            ancestor::body//said[@xml:id = replace($next-said-id, '#', '')]//placeName/text() |
-                            ancestor::body//said[@xml:id = replace($next-said-id, '#', '')]//persName/text()|
-                            ancestor::body//said[@xml:id = replace($next-said-id, '#', '')]//roleName/text()"
-                        />
+                        <xsl:value-of select="./[replace(@next, '#', '')]"/>
                     </xsl:variable>
                     
-                    <xsl:value-of select="replace($next-said-text, '-', '')"/>
+                    <xsl:apply-templates select="ancestor::TEI//body//said[@xml:id=$next-said-id]" mode="texte-modernise"/>
                     
                     <xsl:choose>
-                        <!-- Désolée c'est très très moche :'( mais je ne suis pas parvenue à faire ce que je voulais (cf passage commenté ci-dessous)  -->
                         
                         <xsl:when
                             test="ancestor::body//said[@xml:id = replace($next-said-id, '#', '')]/@next">
@@ -731,33 +680,8 @@
                                     select="ancestor::body//said[@xml:id = replace($next-said-id, '#', '')]/@next"
                                 />
                             </xsl:variable>
-                            <xsl:variable name="next-next-said-text">
-                                <xsl:value-of
-                                    select="
-                                    ancestor::body//said[@xml:id = replace($next-next-said-id, '#', '')]/text() |
-                                    ancestor::body//said[@xml:id = replace($next-next-said-id, '#', '')]//reg/text() |
-                                    ancestor::body//said[@xml:id = replace($next-next-said-id, '#', '')]//expan/text() |
-                                    ancestor::body//said[@xml:id = replace($next-next-said-id, '#', '')]//corr/text() |
-                                    ancestor::body//said[@xml:id = replace($next-next-said-id, '#', '')]//g/text() |
-                                    ancestor::body//said[@xml:id = replace($next-next-said-id, '#', '')]//seg/text() |
-                                    ancestor::body//said[@xml:id = replace($next-next-said-id, '#', '')]//placeName/text() |
-                                    ancestor::body//said[@xml:id = replace($next-next-said-id, '#', '')]//persName/text()|
-                                    ancestor::body//said[@xml:id = replace($next-next-said-id, '#', '')]//roleName/text()"
-                                />
-                            </xsl:variable>
                             
-                            <!-- Citation -->
-                            <xsl:value-of
-                                select="replace($next-next-said-text, '-', '')"/>
-                            
-                            <xsl:choose>
-                                <xsl:when test="contains($next-next-said-text, '-')">
-                                    <xsl:text/>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:text> </xsl:text>
-                                </xsl:otherwise>
-                            </xsl:choose>
+                            <xsl:apply-templates select="ancestor::TEI//body//said[@xml:id=$next-next-said-id]" mode="texte-modernise"/>
                             
                             <!-- Numero de lignes -->
                             <xsl:choose>
@@ -773,14 +697,7 @@
                                         />
                                     </span>
                                     
-                                    <xsl:choose>
-                                        <xsl:when test="position() != last()">
-                                            <xsl:text>, </xsl:text>
-                                        </xsl:when>
-                                        <xsl:otherwise>
-                                            <xsl:text>.</xsl:text>
-                                        </xsl:otherwise>
-                                    </xsl:choose>
+                                    <xsl:call-template name="point-virgule"/>
                                 </xsl:when>
                                 
                                 <xsl:otherwise>
@@ -790,26 +707,13 @@
                                             select="concat('(l. ', $numero-ligne, ' - ', $numero-ligne + 2, ')')"
                                         />
                                     </span>
-                                    <xsl:if test="position() != last()">
-                                        <xsl:text>, </xsl:text>
-                                    </xsl:if>
-                                    <xsl:if test="position() = last()">
-                                        <xsl:text>.</xsl:text>
-                                    </xsl:if>
+                                    <xsl:call-template name="point-virgule"/>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </xsl:when>
                         
                         <xsl:otherwise>
                             <!-- affichage des numéros de lignes si la prise de parole n'est que sur 2 lignes  -->
-                            <xsl:choose>
-                                <xsl:when test="contains($next-said-text, '-')">
-                                    <xsl:text/>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:text> </xsl:text>
-                                </xsl:otherwise>
-                            </xsl:choose>
                             
                             <!-- Numero de lignes -->
                             <span class="badge badge-light">
@@ -817,75 +721,88 @@
                                     select="concat('(l. ', $numero-ligne, ' - ', $numero-ligne + 1, ')')"
                                 />
                             </span>
-                            <xsl:if test="position() != last()">
-                                <xsl:text>, </xsl:text>
-                            </xsl:if>
-                            <xsl:if test="position() = last()">
-                                <xsl:text>.</xsl:text>
-                            </xsl:if>
+                            <xsl:call-template name="point-virgule"/>
                         </xsl:otherwise>
                     </xsl:choose>
-                    
-                    <!--<xsl:for-each select="./@next"> <!-/- l'attribut @next contenait au départ tous les identifiants des <said> suivants -/->
-                                        <!-\- pour tous les identifiants conservés dans la balise next du said -\->
-                                        <xsl:variable name="said-id" select="replace(., '#', '')"/> <!-\- on stocke la valeur de cet identifiant -\->
-                                        
-                                        <xsl:variable name="next-said">
-                                            <xsl:value-of select="ancestor::TEI//body//said[@xml:id = $said-id]"/>
-                                        </xsl:variable>
-                                        
-                                        <xsl:value-of select="$next-said/text() |
-                                            $next-said//reg/text() |
-                                            $next-said//expan/text() |
-                                            $next-said//corr/text() |
-                                            $next-said//persName/text() |
-                                            $next-said//placeName/text() |
-                                            $next-said//seg//text() |
-                                            $next-said//g/text()"/>
-                                            
-                                            <xsl:if test="position() = last()">
-                                        <!-/- si c'est la dernière valeur de l'attribut next -/->
-                                        <xsl:variable name="last-line">
-                                            <xsl:value-of select="ancestor-or-self::seg/[replace(@facs, '#l', '')]"/>
-                                        </xsl:variable>
-                                        <span class="badge badge-light">
-                                            <xsl:value-of select="concat('(l. ', $numero-ligne, ' - ', $last-line, ')')"/>
-                                        </span>
-                                    </xsl:if>
-                                    </xsl:for-each>-->
-                    
                     
                 </xsl:when>
                 <xsl:otherwise>
                     <!-- Si la prise de parole ne court sur qu'une ligne -->
                     
-                    <xsl:value-of select="replace($begin-said, '-', '')"/>
-                    
-                    <xsl:choose>
-                        <!-- si la première partie de la prise de parole fini par un mot tronqué, on ne met pas d'espace entre les propositions -->
-                        <xsl:when test="contains($begin-said, '-')">
-                            <xsl:text/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:text> </xsl:text>
-                        </xsl:otherwise>
-                    </xsl:choose>
+                    <xsl:apply-templates select="." mode="texte-modernise"/>
                     
                     <span class="badge badge-light">
                         <xsl:value-of select="concat('(l. ', $numero-ligne, ')')"/>
                     </span>
-                    <xsl:if test="position() != last()">
-                        <!-- si l'élément n'est pas le dernier, on met une virgule -->
-                        <xsl:text>, </xsl:text>
-                    </xsl:if>
-                    <xsl:if test="position() = last()">
-                        <xsl:text>.</xsl:text>
-                    </xsl:if>
+                    <xsl:call-template name="point-virgule"/>
                 </xsl:otherwise>
             </xsl:choose>
         </p>
     </xsl:template>
 
+    <xsl:template match="TEI//body//said" mode="texte-modernise">
+        <xsl:variable name="said-text">
+            <xsl:value-of select="./text() |
+                .//reg/text() |
+                .//expan/text() |
+                .//corr/text() |
+                .//persName/text() |
+                .//placeName/text() |
+                .//seg/text() |
+                .//g/text()|
+                .//roleName/text()"/>
+        </xsl:variable>
+
+        <xsl:choose>
+            <!-- si la chaine de caractère se termine par un tiret, càd si elle est tronquée -->
+            <xsl:when test="ends-with($said-text, '-')">
+                <xsl:value-of select="replace($said-text, '-', '')"/>
+            </xsl:when>
+            <!-- sinon je rajoute une espace pour ne pas que la prochaine ligne soit collée -->
+            <xsl:otherwise>
+                <xsl:value-of select="concat($said-text, ' ')"/>
+            </xsl:otherwise>
+        </xsl:choose>
+        
+       <!-- <xsl:choose>
+            <xsl:when test="./@next">
+                
+            </xsl:when>
+        </xsl:choose>-->
+    </xsl:template>
+
+    <xsl:template match="TEI//body/said" mode="next-said">
+        
+        <xsl:variable name="said-id" select="./@xml:id"/>
+        <xsl:variable name="current-line">
+            <xsl:value-of select="ancestor-or-self::seg/@facs"/>
+        </xsl:variable>
+        <xsl:variable name="first-said-id" select="./@prev"/>
+        <xsl:variable name="first-line">
+            <xsl:value-of select="ancestor::TEI//body//said[@xml:id = replace($first-said-id, '#', '')]/ancestor-or-self::seg/@facs"/>
+        </xsl:variable>
+        
+       <xsl:apply-templates select="." mode="texte-modernise"/>
+        
+        <xsl:choose>
+            <!-- s'il y un said dont l'attribut @prev référence le présent said -->
+            <xsl:when test="ancestor::TEI//body//said[@prev=concat('#', $said-id)]">
+                <xsl:apply-templates select="ancestor::TEI//body//said[@prev=concat('#', $said-id)]" mode="next-said"/>
+            </xsl:when>
+            
+            <xsl:otherwise>
+                <!-- sinon j'affiche le balisage de ligne -->
+                <span class="badge badge-light">
+                    <xsl:text>l. </xsl:text>
+                    <xsl:value-of select="replace($first-line, '#l', '')"/>
+                    <xsl:text> - </xsl:text>
+                    <xsl:value-of select="replace($current-line, '#l', '')"/>
+                </span>
+            </xsl:otherwise>
+        </xsl:choose>
+        
+    </xsl:template>
+    
     <!-- NOTICE -->
     <xsl:template name="notice">
         <h1 class="p-3">
