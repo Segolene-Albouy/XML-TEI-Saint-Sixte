@@ -354,6 +354,8 @@
         <meta name="author" content="Ségolène &amp; Timothé ALBOUY"/>
         <meta name="description" content="Édition numérique de la {$titre} dans le manuscrit {$cote} de la {$bibli}"/>
         <meta name="keywords" content="XSLT,XML,TEI"/>
+        
+        <link rel="icon" type="image/png" href="IMAGE/favicon.png" />
     </xsl:template>
 
     <!-- Séparateur de liste -->
@@ -1101,7 +1103,7 @@
                 <h4>Transcription : </h4>
             </div>
             <div class="col-sm-5">
-                <div class="btn-group btn-group-toggle">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-secondary">
                         <input type="radio" name="version" onchange="changeVersion('rv')"
                             checked="checked"/>
