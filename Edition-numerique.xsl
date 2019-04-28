@@ -738,7 +738,6 @@
                 <xsl:apply-templates select="ancestor::TEI//body//said[@xml:id=$next-said-id]" mode="texte-modernise"/>
             </xsl:if>
     </xsl:template>
-
     
     <!-- NOTICE -->
     <xsl:template name="notice">
