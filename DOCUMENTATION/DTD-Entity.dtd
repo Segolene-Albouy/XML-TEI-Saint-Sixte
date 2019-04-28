@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!ENTITY pre "<choice><abbr>p&#772;</abbr><expan>pre</expan></choice>" >
-<!ENTITY pré "<choice><abbr>p&#772;</abbr><expan>pré</expan></choice>" >
-<!ENTITY par "<choice><abbr>&#42833;</abbr><expan>par</expan></choice>" >
-<!ENTITY per "<choice><abbr>&#42833;</abbr><expan>per</expan></choice>" >
-<!ENTITY et "<choice><abbr> &#8266;</abbr><expan> et </expan></choice>" >
-<!ENTITY Et "<choice><abbr> &#8266;</abbr><expan> Et </expan></choice>" >
-<!ENTITY com "<choice><abbr>&#42863;</abbr><expan>com</expan></choice>" >
-<!ENTITY con "<choice><abbr>&#42863;</abbr><expan>con</expan></choice>" >
-<!ENTITY os "<choice><abbr>&#42863;</abbr><expan>os</expan></choice>" >
+<!ENTITY pre "<choice><abbr>p&#x304;</abbr><expan>pre</expan></choice>" >
+<!ENTITY pré "<choice><abbr>p&#x304;</abbr><expan>pré</expan></choice>" >
+<!ENTITY par "<choice><abbr>&#xa751;</abbr><expan>par</expan></choice>" >
+<!ENTITY per "<choice><abbr>&#xa751;</abbr><expan>per</expan></choice>" >
+<!ENTITY et "<choice><abbr> &#x204a;</abbr><expan> et </expan></choice>" >
+<!ENTITY Et "<choice><abbr> &#x204a;</abbr><expan> Et </expan></choice>" >
+<!ENTITY com "<choice><abbr>&#xa76f;</abbr><expan>com</expan></choice>" >
+<!ENTITY con "<choice><abbr>&#xa76f;</abbr><expan>con</expan></choice>" >
+<!ENTITY os "<choice><abbr>&#xa76e;</abbr><expan>os</expan></choice>" >
 <!ENTITY an "<choice><abbr>&#257;</abbr><expan>an</expan></choice>" >
 <!ENTITY en "<choice><abbr>&#275;</abbr><expan>en</expan></choice>" >
 <!ENTITY in "<choice><abbr>&#299;</abbr><expan>in</expan></choice>" >
@@ -29,8 +29,8 @@
 <!ENTITY deux-points "<choice><orig> &#183; </orig><reg> : </reg></choice>" >
 <!ENTITY point-interrogation0 "<choice><sic></sic><corr> ? </corr></choice>" >
 <!ENTITY point-interrogation1 "<choice><orig>. </orig><reg> ? </reg></choice>" >
-<!ENTITY punctus-elevatus "<choice><orig> &#11854; </orig><reg> ; </reg></choice>" > <!--code décimal trouvé ici : https://www.fileformat.info/info/unicode/char/2e4e/index.htm -->
-<!ENTITY punctus-interrogatus "<choice><orig> &#11854; </orig><reg> ? </reg></choice>" >
+<!ENTITY punctus-elevatus "<choice><orig> &#x2e4e;</orig><reg> ; </reg></choice>" > <!--code décimal trouvé ici : https://www.fileformat.info/info/unicode/char/2e4e/index.htm -->
+<!ENTITY punctus-interrogatus "<choice><orig> &#x2e4e;</orig><reg> ? </reg></choice>" >
 
 <!ENTITY espace "<choice><orig></orig><reg> </reg></choice>" >
 <!ENTITY apost "<choice><orig></orig><reg>’</reg></choice>" >
