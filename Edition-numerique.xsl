@@ -9,46 +9,46 @@
     <!-- TEMPLATE PAGES HTML -->
     <xsl:template match="/">
         <!-- DEFINITION DES VARIABLES DE NOMS DE FICHIERS DE SORTIE -->
-        <xsl:variable name="path-accueil">
+        <xsl:variable name="path-index">
             <xsl:text>index.html</xsl:text>
         </xsl:variable>
         <xsl:variable name="path-facsimile">
             <xsl:text>facsimile-interactif.html</xsl:text>
         </xsl:variable>
-        <xsl:variable name="path-textometrie">
+        <xsl:variable name="path-textometry">
             <xsl:text>textometrie.html</xsl:text>
         </xsl:variable>
-        <xsl:variable name="path-notice">
+        <xsl:variable name="path-catalogue-record">
             <xsl:text>notice.html</xsl:text>
         </xsl:variable>
         <xsl:variable name="path-biblio">
             <xsl:text>bibliographie.html</xsl:text>
         </xsl:variable>
-        <xsl:variable name="path-a-propos">
+        <xsl:variable name="path-about">
             <xsl:text>a-propos.html</xsl:text>
         </xsl:variable>
 
         <!-- DEFINITION DES VARIABLES UTILES -->
-        <xsl:variable name="banniere">
+        <xsl:variable name="jumbotron">
             <xsl:value-of select="//surface[1]/graphic/@url"/>
         </xsl:variable>
-        <xsl:variable name="titre">
+        <xsl:variable name="title">
             <xsl:value-of select="//titleStmt/title"/>
         </xsl:variable>
-        <xsl:variable name="cote">
+        <xsl:variable name="shelfmark">
             <xsl:value-of select="//msIdentifier/idno"/>
         </xsl:variable>
-        <xsl:variable name="bibli">
+        <xsl:variable name="library">
             <xsl:value-of select="//msIdentifier/repository"/>
         </xsl:variable>
 
         <!-- PAGE D'ACCUEIL -->
-        <xsl:result-document href="{$path-accueil}" method="html" indent="yes">
+        <xsl:result-document href="{$path-index}" method="html" indent="yes">
             <html>
                 <head>
                     <xsl:call-template name="meta-header"/>
                     <title>
-                        <xsl:value-of select="concat($titre, ' | ', 'Accueil')"/>
+                        <xsl:value-of select="concat($title, ' | ', 'Accueil')"/>
                     </title>
                     <style type="text/css">
                         .jumbotron {
@@ -61,9 +61,9 @@
                 <body>
                     <xsl:call-template name="navbar"/>
                     <div class="container">
-                        <div class="jumbotron" style="background-image:  url({$banniere})">
+                        <div class="jumbotron" style="background-image:  url({$jumbotron})">
                             <h1 class="display-4">
-                                <xsl:value-of select="$titre"/>
+                                <xsl:value-of select="$title"/>
                             </h1>
                             <p class="lead">
                                 <em><xsl:value-of select="//msItem/incipit"/></em>
@@ -71,15 +71,15 @@
                         </div>
                         <div class="offset-md-3 col-md-6 offset-sm-2 col-sm-8 text-center">
                             <p class="lead text-muted container">Bienvenue sur l'édition numérique
-                                de la <xsl:value-of select="$titre"/> issu du manuscrit
-                                    <xsl:value-of select="$cote"/>, conservé à la <xsl:value-of
-                                    select="$bibli"/></p>
+                                de la <xsl:value-of select="$title"/> issu du manuscrit
+                                    <xsl:value-of select="$shelfmark"/>, conservé à la <xsl:value-of
+                                    select="$library"/></p>
                         </div>
 
                         <div class="row text-center" style="place-content: center">
                             <div class="col-md-3">
                                 <button type="button" class="btn btn-warning">
-                                    <a href="{$path-textometrie}" style="color: black;">Analyse
+                                    <a href="{$path-textometry}" style="color: black;">Analyse
                                         textométrique</a>
                                 </button>
                             </div>
@@ -91,7 +91,7 @@
                             </div>
                             <div class="col-md-3">
                                 <button type="button" class="btn btn-warning">
-                                    <a href="{$path-notice}" style="color: black;">Notice du manuscrit</a>
+                                    <a href="{$path-catalogue-record}" style="color: black;">Notice du manuscrit</a>
                                 </button>
                             </div>
                             <div class="col-md-3">
@@ -106,7 +106,7 @@
         </xsl:result-document>
 
         <!--  PAGE TEXTOMETRIE -->
-        <xsl:result-document href="{$path-textometrie}" method="html" indent="yes">
+        <xsl:result-document href="{$path-textometry}" method="html" indent="yes">
             <html>
                 <head>
                     <xsl:call-template name="meta-header"/>
@@ -114,7 +114,7 @@
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"/>
                     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"/>
                     <title>
-                        <xsl:value-of select="concat($titre, ' | ', 'Index textométrique')"/>
+                        <xsl:value-of select="concat($title, ' | ', 'Index textométrique')"/>
                     </title>
                 </head>
                 <body>
@@ -141,18 +141,18 @@
                             <div class="tab-pane fade show active" id="perso" role="tabpanel"
                                 aria-labelledby="perso-tab">
                                 <div class="col-md-10 col-md-offset-2">
-                                    <xsl:call-template name="textometrie-perso"/>
+                                    <xsl:call-template name="textometry-perso"/>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="place" role="tabpanel"
                                 aria-labelledby="place-tab">
                                 <div class="col-md-10 col-md-offset-2">
-                                    <xsl:call-template name="textometrie-place"/>
+                                    <xsl:call-template name="textometry-place"/>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="talk" role="tabpanel"
                                 aria-labelledby="talk-tab">
-                                    <xsl:call-template name="textometrie-parole"/>
+                                    <xsl:call-template name="textometry-parole"/>
                             </div>
                         </div>
                     </div>
@@ -166,7 +166,7 @@
                 <head>
                     <xsl:call-template name="meta-header"/>
                     <title>
-                        <xsl:value-of select="concat($titre, ' | ', 'Facsimile interactif')"/>
+                        <xsl:value-of select="concat($title, ' | ', 'Facsimile interactif')"/>
                     </title>
                     <style>
                         .section-wrapper {
@@ -226,18 +226,18 @@
         </xsl:result-document>
 
         <!-- PAGE DE NOTICE BIBLIOGRAPHIQUE -->
-        <xsl:result-document href="{$path-notice}" method="html" indent="yes">
+        <xsl:result-document href="{$path-catalogue-record}" method="html" indent="yes">
             <html>
                 <head>
                     <xsl:call-template name="meta-header"/>
                     <title>
-                        <xsl:value-of select="concat($titre, ' | ', 'Notice bibliographique')"/>
+                        <xsl:value-of select="concat($title, ' | ', 'Notice bibliographique')"/>
                     </title>
                 </head>
                 <body>
                     <xsl:call-template name="navbar"/>
                     <div class="container">
-                            <xsl:call-template name="notice"/>
+                            <xsl:call-template name="catalogue-record"/>
                     </div>
                 </body>
             </html>
@@ -249,7 +249,7 @@
                 <head>
                     <xsl:call-template name="meta-header"/>
                     <title>
-                        <xsl:value-of select="concat($titre, ' | ', 'Références bibliographiques')"/>
+                        <xsl:value-of select="concat($title, ' | ', 'Références bibliographiques')"/>
                     </title>
                 </head>
                 <body>
@@ -264,12 +264,12 @@
         </xsl:result-document>
 
         <!-- À PROPOS -->
-        <xsl:result-document href="{$path-a-propos}">
+        <xsl:result-document href="{$path-about}">
             <html>
                 <head>
                     <xsl:call-template name="meta-header"/>
                     <title>
-                        <xsl:value-of select="concat($titre, ' | ', 'À propos')"/>
+                        <xsl:value-of select="concat($title, ' | ', 'À propos')"/>
                     </title>
                 </head>
                 <body>
@@ -291,22 +291,22 @@
 
     <!-- NAVBAR -->
     <xsl:template name="navbar">
-        <xsl:variable name="path-accueil">
+        <xsl:variable name="path-index">
             <xsl:text>index.html</xsl:text>
         </xsl:variable>
         <xsl:variable name="path-facsimile">
             <xsl:text>facsimile-interactif.html</xsl:text>
         </xsl:variable>
-        <xsl:variable name="path-textometrie">
+        <xsl:variable name="path-textometry">
             <xsl:text>textometrie.html</xsl:text>
         </xsl:variable>
-        <xsl:variable name="path-notice">
+        <xsl:variable name="path-catalogue-record">
             <xsl:text>notice.html</xsl:text>
         </xsl:variable>
         <xsl:variable name="path-biblio">
             <xsl:text>bibliographie.html</xsl:text>
         </xsl:variable>
-        <xsl:variable name="path-a-propos">
+        <xsl:variable name="path-about">
             <xsl:text>a-propos.html</xsl:text>
         </xsl:variable>
 
@@ -315,19 +315,19 @@
 
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{$path-textometrie}">Analyse textométrique</a>
+                    <a class="nav-link" href="{$path-textometry}">Analyse textométrique</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{$path-facsimile}">Facsimile interactif</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{$path-notice}">Notice</a>
+                    <a class="nav-link" href="{$path-catalogue-record}">Notice</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{$path-biblio}">Bibliographie</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{$path-a-propos}">À propos</a>
+                    <a class="nav-link" href="{$path-about}">À propos</a>
                 </li>
             </ul>
         </nav>
@@ -335,13 +335,13 @@
     
     <!-- HEADER HTML -->
     <xsl:template name="meta-header">
-        <xsl:variable name="titre">
+        <xsl:variable name="title">
             <xsl:value-of select="//titleStmt/title"/>
         </xsl:variable>
-        <xsl:variable name="cote">
+        <xsl:variable name="shelfmark">
             <xsl:value-of select="//msIdentifier/idno"/>
         </xsl:variable>
-        <xsl:variable name="bibli">
+        <xsl:variable name="library">
             <xsl:value-of select="//msIdentifier/repository"/>
         </xsl:variable>
         
@@ -352,14 +352,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta charset="UTF-8"/>
         <meta name="author" content="Ségolène &amp; Timothé ALBOUY"/>
-        <meta name="description" content="Édition numérique de la {$titre} dans le manuscrit {$cote} de la {$bibli}"/>
+        <meta name="description" content="Édition numérique de la {$title} dans le manuscrit {$shelfmark} de la {$library}"/>
         <meta name="keywords" content="XSLT,XML,TEI"/>
         
         <link rel="icon" type="image/png" href="IMAGE/favicon.png" />
     </xsl:template>
 
     <!-- Séparateur de liste -->
-    <xsl:template name="point-virgule">
+    <xsl:template name="comma-point">
         <xsl:choose>
             <xsl:when test="position() != last()">
                 <xsl:text>, </xsl:text>
@@ -370,7 +370,7 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="TEI//body//seg" mode="texte-modernise">
+    <xsl:template match="TEI//body//seg" mode="edited-text">
         <xsl:value-of select="./text() |
             .//reg/text() |
             .//expan/text() |
@@ -384,7 +384,7 @@
     </xsl:template>
     
     <!-- OCCURRENCES PERSONNAGES -->
-    <xsl:template name="textometrie-perso">
+    <xsl:template name="textometry-perso">
         <h1>Listes de personnages</h1>
         <small class="text-muted">Cliquez sur le numéro de ligne d'une occurence pour afficher le
             contexte textuel où elle appararaît.</small>
@@ -438,7 +438,7 @@
         </xsl:if>
     </xsl:template>
     
-    <xsl:template match="TEI//body//persName" mode="texte-modernise">
+    <xsl:template match="TEI//body//persName" mode="edited-text">
         <xsl:value-of
             select="
             text() |
@@ -453,60 +453,60 @@
     <xsl:template match="TEI//body//persName" mode="perso">
         <xsl:variable name="occurrence">
             <xsl:value-of>
-                <xsl:apply-templates select="." mode="texte-modernise"/>
+                <xsl:apply-templates select="." mode="edited-text"/>
             </xsl:value-of>
         </xsl:variable>
         
         <!-- premiere partie du mot à cheval sur 2 lignes -->
-        <xsl:variable name="nom-part1">
+        <xsl:variable name="name-part1">
             <xsl:value-of select="replace($occurrence, '-', '')"/>
         </xsl:variable>
         
-        <xsl:variable name="nom-part2-id">
+        <xsl:variable name="name-part2-id">
             <xsl:value-of select="replace(./@next, '#', '')"/>
         </xsl:variable>
-        <xsl:variable name="nom-part2">
-            <xsl:value-of select="ancestor::TEI//body//persName[@xml:id = $nom-part2-id]"/>
+        <xsl:variable name="name-part2">
+            <xsl:value-of select="ancestor::TEI//body//persName[@xml:id = $name-part2-id]"/>
         </xsl:variable>
         
-        <xsl:variable name="ligne">
+        <xsl:variable name="line">
             <!-- ancestor-or-self:: permet d'avoir le plus proche parent correspondant à ce noeud -->
             <xsl:value-of>
-                <xsl:apply-templates select=" ancestor-or-self::seg" mode="texte-modernise"/>
+                <xsl:apply-templates select=" ancestor-or-self::seg" mode="edited-text"/>
             </xsl:value-of>
         </xsl:variable>
         
         <!-- Correction d'un bug que je n'explique pas bloquant l'affichage -->
-        <xsl:variable name="ligne-bug">
-            <xsl:value-of select="replace($ligne, '&#xA;                  ', ' ')"/>
+        <xsl:variable name="line-bug">
+            <xsl:value-of select="replace($line, '&#xA;                  ', ' ')"/>
         </xsl:variable>
         
-        <xsl:variable name="numero-ligne">
+        <xsl:variable name="line-number">
             <xsl:value-of select="ancestor-or-self::seg/@facs"/>
         </xsl:variable>
         
-        <span class="badge badge-light" onclick="alert('{$ligne-bug}')">
+        <span class="badge badge-light" onclick="alert('{$line-bug}')">
             <xsl:text> (l. </xsl:text>
-            <xsl:value-of select="replace($numero-ligne, '#l', '')"/>
+            <xsl:value-of select="replace($line-number, '#l', '')"/>
             <xsl:text>)</xsl:text>
         </span>
         
         <xsl:choose>
             <xsl:when test="./@next">
                 <!-- si la balise persName possède un attribut next (càd si le nom est à cheval sur deux lignes) -->
-                <xsl:value-of select="[concat($nom-part1, $nom-part2)]"/>
+                <xsl:value-of select="[concat($name-part1, $name-part2)]"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="$occurrence"/>
             </xsl:otherwise>
         </xsl:choose>
         
-        <xsl:call-template name="point-virgule"/>
+        <xsl:call-template name="comma-point"/>
         
     </xsl:template>
 
     <!-- OCCURRENCES LIEUX -->
-    <xsl:template name="textometrie-place">
+    <xsl:template name="textometry-place">
         <h1>Listes de lieux</h1>
         <small class="text-muted">Cliquez sur le numéro de ligne d'une occurence pour afficher le
             contexte textuel où elle apparaît.</small>
@@ -557,7 +557,7 @@
         </div>
     </xsl:template>
     
-    <xsl:template match="TEI//body//placeName" mode="texte-modernise">
+    <xsl:template match="TEI//body//placeName" mode="edited-text">
             <xsl:value-of
                 select="
                 text() |
@@ -572,63 +572,63 @@
     <xsl:template match="TEI//body//placeName" mode="place">
         <xsl:variable name="occurrence">
             <xsl:value-of>
-                <xsl:apply-templates select="." mode="texte-modernise"/>
+                <xsl:apply-templates select="." mode="edited-text"/>
             </xsl:value-of>
         </xsl:variable>
         
         <!-- premiere partie du mot à cheval sur 2 lignes -->
-        <xsl:variable name="nom-part1">
+        <xsl:variable name="name-part1">
             <xsl:value-of select="replace($occurrence, '-', '')"/>
         </xsl:variable>
         
-        <xsl:variable name="nom-part2-id">
+        <xsl:variable name="name-part2-id">
             <xsl:value-of select="replace(./@next, '#', '')"/>
         </xsl:variable>
-        <xsl:variable name="nom-part2">
-            <xsl:value-of select="ancestor::TEI//body//persName[@xml:id = $nom-part2-id]"/>
+        <xsl:variable name="name-part2">
+            <xsl:value-of select="ancestor::TEI//body//persName[@xml:id = $name-part2-id]"/>
         </xsl:variable>
         
-        <xsl:variable name="ligne">
+        <xsl:variable name="line">
             <xsl:value-of>
-                <xsl:apply-templates select=" ancestor-or-self::seg" mode="texte-modernise"/>
+                <xsl:apply-templates select=" ancestor-or-self::seg" mode="edited-text"/>
             </xsl:value-of>
         </xsl:variable>
         
         <!-- Correction d'un bug bloquant l'affichage -->
-        <xsl:variable name="ligne-bug">
-            <xsl:value-of select="replace($ligne, '&#xA;                  ', ' ')"/>
+        <xsl:variable name="line-bug">
+            <xsl:value-of select="replace($line, '&#xA;                  ', ' ')"/>
         </xsl:variable>
         
-        <xsl:variable name="numero-ligne">
+        <xsl:variable name="line-number">
             <xsl:value-of select="ancestor-or-self::seg/@facs"/>
         </xsl:variable>
         
-        <span class="badge badge-light" onclick="alert('{$ligne-bug}')">
+        <span class="badge badge-light" onclick="alert('{$line-bug}')">
             <xsl:text> (l. </xsl:text>
-            <xsl:value-of select="replace($numero-ligne, '#l', '')"/>
+            <xsl:value-of select="replace($line-number, '#l', '')"/>
             <xsl:text>)</xsl:text>
         </span>
         
         <xsl:choose>
             <xsl:when test="./@next">
                 <!-- si la balise placeName possède un attribut next (càd si le nom est à cheval sur deux lignes) -->
-                <xsl:value-of select="[concat($nom-part1, $nom-part2)]"/>
+                <xsl:value-of select="[concat($name-part1, $name-part2)]"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="$occurrence"/>
             </xsl:otherwise>
         </xsl:choose>
         
-        <xsl:call-template name="point-virgule"/>
+        <xsl:call-template name="comma-point"/>
     </xsl:template>
 
     <!-- OCCURRENCES PRISE DE PAROLES -->
-    <xsl:template name="textometrie-parole">
+    <xsl:template name="textometry-parole">
         <h1>Prises de paroles</h1>
-        <xsl:apply-templates select="//listPerson//person" mode="prise-de-parole"/>
+        <xsl:apply-templates select="//listPerson//person" mode="speaking"/>
     </xsl:template>
     
-    <xsl:template match="//listPerson//person" mode="prise-de-parole">
+    <xsl:template match="//listPerson//person" mode="speaking">
         <xsl:variable name="idPerson">
             <xsl:value-of select="./@xml:id"/>
         </xsl:variable>
@@ -663,12 +663,12 @@
                 </small>
                 
                 <!-- PRISES DE PAROLES -->
-                <xsl:apply-templates select="ancestor::TEI//body//said[replace(@who, '#', '') = $idPerson]" mode="prise-de-parole"/>
+                <xsl:apply-templates select="ancestor::TEI//body//said[replace(@who, '#', '') = $idPerson]" mode="speaking"/>
             </div>
         </xsl:if>
     </xsl:template>
     
-    <xsl:template match="TEI//body//said" mode="prise-de-parole">
+    <xsl:template match="TEI//body//said" mode="speaking">
         <p class="card-text">
             <xsl:variable name="first-line">
                 <xsl:value-of
@@ -681,7 +681,7 @@
             </xsl:variable>
             
             <xsl:text>« </xsl:text>
-            <xsl:apply-templates select="." mode="texte-modernise"/>
+            <xsl:apply-templates select="." mode="edited-text"/>
             <xsl:text> »</xsl:text>
             
             <span class="badge badge-light">
@@ -707,7 +707,7 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="TEI//body//said" mode="texte-modernise">
+    <xsl:template match="TEI//body//said" mode="edited-text">
         <xsl:variable name="said-text">
             <xsl:value-of select="./text() |
                 .//reg/text() |
@@ -735,12 +735,12 @@
                 <xsl:variable name="next-said-id">
                     <xsl:value-of select="replace(./@next, '#', '')"/>
                 </xsl:variable>
-                <xsl:apply-templates select="ancestor::TEI//body//said[@xml:id=$next-said-id]" mode="texte-modernise"/>
+                <xsl:apply-templates select="ancestor::TEI//body//said[@xml:id=$next-said-id]" mode="edited-text"/>
             </xsl:if>
     </xsl:template>
     
     <!-- NOTICE -->
-    <xsl:template name="notice">
+    <xsl:template name="catalogue-record">
         <h1 class="p-3">
             <xsl:text>Manuscrit </xsl:text>
             <em>
