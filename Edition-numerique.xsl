@@ -356,6 +356,23 @@
         <meta name="keywords" content="XSLT,XML,TEI"/>
         
         <link rel="icon" type="image/png" href="IMAGE/favicon.png" />
+        
+        <style>
+            @font-face {
+            font-family: 'symbolaregular';
+            src: url('/FONT/symbola_hinted-webfont.woff2') format('woff2'),
+            url('FONT/symbola_hinted-webfont.woff') format('woff');
+
+            }
+            
+            body {
+            font-family: 'symbolaregular';
+            }
+        </style>
+        <!--
+            src: url('http://edition-saint-sixte.alwaysdata.net/CSS/symbola_hinted-webfont.woff2') format('woff2'),
+            url('http://edition-saint-sixte.alwaysdata.net/CSS/symbola_hinted-webfont.woff') format('woff');
+        -->
     </xsl:template>
 
     <!-- Séparateur de liste -->
@@ -494,10 +511,14 @@
         <xsl:choose>
             <xsl:when test="./@next">
                 <!-- si la balise persName possède un attribut next (càd si le nom est à cheval sur deux lignes) -->
+                <xsl:text>« </xsl:text>
                 <xsl:value-of select="[concat($name-part1, $name-part2)]"/>
+                <xsl:text> »</xsl:text>
             </xsl:when>
             <xsl:otherwise>
+                <xsl:text>« </xsl:text>
                 <xsl:value-of select="$occurrence"/>
+                <xsl:text> »</xsl:text>
             </xsl:otherwise>
         </xsl:choose>
         
@@ -612,10 +633,14 @@
         <xsl:choose>
             <xsl:when test="./@next">
                 <!-- si la balise placeName possède un attribut next (càd si le nom est à cheval sur deux lignes) -->
+                <xsl:text>« </xsl:text>
                 <xsl:value-of select="[concat($name-part1, $name-part2)]"/>
+                <xsl:text> »</xsl:text>
             </xsl:when>
             <xsl:otherwise>
+                <xsl:text>« </xsl:text>
                 <xsl:value-of select="$occurrence"/>
+                <xsl:text> »</xsl:text>
             </xsl:otherwise>
         </xsl:choose>
         
@@ -1018,9 +1043,9 @@
     
     <xsl:template match="TEI//bibl//title">
         <xsl:if test=".[@level='a']">
-            <xsl:text>« </xsl:text>
+            <xsl:text>« </xsl:text>
             <xsl:value-of select="."/>
-            <xsl:text> », </xsl:text>
+            <xsl:text> », </xsl:text>
         </xsl:if>
         <xsl:if test=".[@level='m']">
             <em><xsl:value-of select="."/></em>
