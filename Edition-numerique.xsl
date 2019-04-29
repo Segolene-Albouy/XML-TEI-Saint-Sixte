@@ -511,12 +511,12 @@
         <xsl:choose>
             <xsl:when test="./@next">
                 <!-- si la balise persName possède un attribut next (càd si le nom est à cheval sur deux lignes) -->
-                <xsl:text>« </xsl:text>
+                <xsl:text> « </xsl:text>
                 <xsl:value-of select="[concat($name-part1, $name-part2)]"/>
                 <xsl:text> »</xsl:text>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:text>« </xsl:text>
+                <xsl:text> « </xsl:text>
                 <xsl:value-of select="$occurrence"/>
                 <xsl:text> »</xsl:text>
             </xsl:otherwise>
@@ -633,12 +633,12 @@
         <xsl:choose>
             <xsl:when test="./@next">
                 <!-- si la balise placeName possède un attribut next (càd si le nom est à cheval sur deux lignes) -->
-                <xsl:text>« </xsl:text>
+                <xsl:text> « </xsl:text>
                 <xsl:value-of select="[concat($name-part1, $name-part2)]"/>
                 <xsl:text> »</xsl:text>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:text>« </xsl:text>
+                <xsl:text> « </xsl:text>
                 <xsl:value-of select="$occurrence"/>
                 <xsl:text> »</xsl:text>
             </xsl:otherwise>
