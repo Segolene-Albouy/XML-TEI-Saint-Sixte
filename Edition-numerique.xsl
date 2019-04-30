@@ -136,17 +136,17 @@
                         /* The actual popup */
                         .popup .popuptext {
                         visibility: hidden;
-                        width: 160px;
-                        background-color: #555;
+                        width: auto;
+                        background-color: rgb(92, 112, 112, 0.85);
                         color: #fff;
                         text-align: center;
                         border-radius: 6px;
-                        padding: 8px 0;
                         position: absolute;
                         z-index: 1;
                         bottom: 125%;
                         left: 50%;
                         margin-left: -80px;
+                        padding: 1em;
                         }
                         
                         /* Popup arrow */
@@ -158,7 +158,7 @@
                         margin-left: -5px;
                         border-width: 5px;
                         border-style: solid;
-                        border-color: #555 transparent transparent transparent;
+                        border-color:  rgb(92, 112, 112, 0.85) transparent transparent transparent;
                         }
                         
                         /* Toggle this class - hide and show the popup */
@@ -183,11 +183,15 @@
                 <body>
                     <xsl:call-template name="navbar"/>
                     <div class="container p-4">
-                        <div class="col-md-6">
-                            <xsl:apply-templates select="TEI//body//p" mode="original-version"/>
-                        </div>
-                        <div class="col-md-6">
-                            <xsl:apply-templates select="TEI//body//p" mode="normalised-version"/>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2>Transcription diplomatique</h2>
+                                <xsl:apply-templates select="TEI//body//p" mode="original-version"/>
+                            </div>
+                            <div class="col-md-6">
+                                <h2>Transcription modernisée</h2>
+                                <xsl:apply-templates select="TEI//body//p" mode="normalised-version"/>
+                            </div>
                         </div>
                     </div>
                 </body>
@@ -606,15 +610,33 @@
     </xsl:template>
     
     <xsl:template match="TEI//body//persName" mode="normalised-version">
-        <xsl:variable name="persId">
+        <xsl:variable name="pers-Id">
             <xsl:value-of select="replace(@ref, '#', '')"/>
         </xsl:variable>
-        <xsl:variable name="persDesc">
-            <xsl:value-of select="ancestor::teiHeader//listPerson/person[@xml:id=$persId]/note//text()"/>
+        <xsl:variable name="persId">
+            <xsl:value-of select="replace($pers-Id, '-', '')"/>
         </xsl:variable>
-        <span class="badge badge-light">
+        <xsl:variable name="persDesc">
+            <xsl:value-of select="ancestor::TEI/teiHeader//listPerson/person[@xml:id=$persId]/note//text()"/>
+        </xsl:variable>
+        <span class="badge badge-light popup">
             <xsl:apply-templates mode="normalised-version"/>
+            <xsl:if test="@ref">
+                <span class="popuptext show" id="{$persId}">
+                    <xsl:value-of select="$persDesc"/>
+                </span>
+            </xsl:if>
         </span>
+        
+        <script>
+            var placeId = <xsl:value-of select="$persId"/>
+            function popUp() {
+                window.addEventListener("DOMContentLoaded", (event) => {
+                    var popup = document.getElementById(placeId);
+                    popup.classList.toggle("show");
+                });
+            }
+        </script>
     </xsl:template>
     
     <xsl:template match="TEI//body//placeName" mode="normalised-version">
@@ -629,9 +651,11 @@
         </xsl:variable>
         <span class="badge badge-light popup" onclick="popUp()">
             <xsl:apply-templates mode="normalised-version"/>
-            <span class="popuptext" id="{$placeId}">
-                <xsl:value-of select="$placeDesc"/>
-            </span>
+            <xsl:if test="@ref">
+                <span class="popuptext show" id="{$placeId}">
+                    <xsl:value-of select="$placeDesc"/>
+                </span>
+            </xsl:if>
         </span>
         
         <script>
@@ -639,10 +663,9 @@
             function popUp() {
                 window.addEventListener("DOMContentLoaded", (event) => {
                     var popup = document.getElementById(placeId);
-                    popup.toggle("show");
+                    popup.classList.toggle("show");
                 });
             }
-            
         </script>
     </xsl:template>
     
@@ -668,7 +691,194 @@
     <xsl:template match="TEI//body//certainty" mode="normalised-version"/>
     
     <!-- - - - -VERSION DIPLOMATIQUE - - - - -->
-    <xsl:template match="TEI//body//p/seg" mode="original-version"></xsl:template>
+    <xsl:template match="TEI//body//p" mode="original-version">
+        <p class="paragraph">
+            <xsl:choose>
+                <xsl:when test="contains(@rend, 'color:red')">
+                    <span class="font-weight-bold" style="color: #c63939">
+                        <xsl:apply-templates mode="original-version"/>
+                    </span>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates mode="original-version"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </p>
+    </xsl:template>
+    
+    <xsl:template match="TEI//body//p/seg" mode="original-version">
+        <!-- Numérotation des lignes -->
+        <xsl:variable name="line-number">
+            <xsl:value-of select="replace(@facs, '#l', '')"/>
+        </xsl:variable>
+        <xsl:choose>
+            <xsl:when test="string-length($line-number) = 1">
+                <xsl:choose>
+                    <xsl:when test="ends-with($line-number, '0')">
+                        <small class="text-muted" style="margin-left: -3em">
+                            <xsl:value-of select="$line-number"/>
+                        </small>
+                        <span class="line" style="margin-left: 2em">
+                            <xsl:apply-templates mode="original-version"/>
+                        </span>
+                        <br/>
+                    </xsl:when>
+                    <xsl:when test="ends-with($line-number, '5')">
+                        <small class="text-muted" style="margin-left: -3em">
+                            <xsl:value-of select="$line-number"/>
+                        </small>
+                        <span class="line" style="margin-left: 2em">
+                            <xsl:apply-templates mode="original-version"/>
+                        </span>
+                        <br/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <span class="line">
+                            <xsl:apply-templates mode="original-version"/>
+                        </span>
+                        <br/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:when test="string-length($line-number) = 2">
+                <xsl:choose>
+                    <xsl:when test="ends-with($line-number, '0')">
+                        <small class="text-muted" style="margin-left: -3em">
+                            <xsl:value-of select="$line-number"/>
+                        </small>
+                        <span class="line" style="margin-left: 25px">
+                            <xsl:apply-templates mode="original-version"/>
+                        </span>
+                        <br/>
+                    </xsl:when>
+                    <xsl:when test="ends-with($line-number, '5')">
+                        <small class="text-muted" style="margin-left: -3em">
+                            <xsl:value-of select="$line-number"/>
+                        </small>
+                        <span class="line" style="margin-left: 25px">
+                            <xsl:apply-templates mode="original-version"/>
+                        </span>
+                        <br/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <span class="line">
+                            <xsl:apply-templates mode="original-version"/>
+                        </span>
+                        <br/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:when test="string-length($line-number) = 3">
+                <xsl:choose>
+                    <xsl:when test="ends-with($line-number, '0')">
+                        <small class="text-muted" style="margin-left: -3em">
+                            <xsl:value-of select="$line-number"/>
+                        </small>
+                        <span class="line" style="margin-left: 1em">
+                            <xsl:apply-templates mode="original-version"/>
+                        </span>
+                        <br/>
+                    </xsl:when>
+                    <xsl:when test="ends-with($line-number, '5')">
+                        <small class="text-muted" style="margin-left: -3em">
+                            <xsl:value-of select="$line-number"/>
+                        </small>
+                        <span class="line" style="margin-left: 1em">
+                            <xsl:apply-templates mode="original-version"/>
+                        </span>
+                        <br/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <span class="line">
+                            <xsl:apply-templates mode="original-version"/>
+                        </span>
+                        <br/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template match="TEI//body//persName" mode="original-version">
+        <xsl:variable name="pers-Id">
+            <xsl:value-of select="replace(@ref, '#', '')"/>
+        </xsl:variable>
+        <xsl:variable name="persId">
+            <xsl:value-of select="replace($pers-Id, '-', '')"/>
+        </xsl:variable>
+        <xsl:variable name="persDesc">
+            <xsl:value-of select="ancestor::TEI/teiHeader//listPerson/person[@xml:id=$persId]/note//text()"/>
+        </xsl:variable>
+        <span class="badge badge-light popup">
+            <xsl:apply-templates mode="original-version"/>
+            <xsl:if test="@ref">
+                <span class="popuptext show" id="{$persId}">
+                    <xsl:value-of select="$persDesc"/>
+                </span>
+            </xsl:if>
+        </span>
+        
+        <script>
+            var placeId = <xsl:value-of select="$persId"/>
+            function popUp() {
+            window.addEventListener("DOMContentLoaded", (event) => {
+            var popup = document.getElementById(placeId);
+            popup.classList.toggle("show");
+            });
+            }
+        </script>
+    </xsl:template>
+    
+    <xsl:template match="TEI//body//placeName" mode="original-version">
+        <xsl:variable name="place-Id">
+            <xsl:value-of select="replace(@ref, '#', '')"/>
+        </xsl:variable>
+        <xsl:variable name="placeId">
+            <xsl:value-of select="replace($place-Id, '-', '')"/>
+        </xsl:variable>
+        <xsl:variable name="placeDesc">
+            <xsl:value-of select="ancestor::TEI/teiHeader//listPlace/place[@xml:id=$place-Id]/note[1]//text()"/>
+        </xsl:variable>
+        <span class="badge badge-light popup" onclick="popUp()">
+            <xsl:apply-templates mode="original-version"/>
+            <xsl:if test="@ref">
+                <span class="popuptext show" id="{$placeId}">
+                    <xsl:value-of select="$placeDesc"/>
+                </span>
+            </xsl:if>
+        </span>
+        
+        <script>
+            var placeId = <xsl:value-of select="$placeId"/>
+            function popUp() {
+            window.addEventListener("DOMContentLoaded", (event) => {
+            var popup = document.getElementById(placeId);
+            popup.classList.toggle("show");
+            });
+            }
+        </script>
+    </xsl:template>
+    
+    <xsl:template match="TEI//body//g" mode="original-version">
+        <xsl:if test="@type = 'initiale'">
+            <xsl:if test="contains(@rend, 'color:red')">
+                <span class="font-weight-bold" style="font-size: large; color: #c63939">
+                    <xsl:apply-templates mode="original-version"/>
+                </span>
+            </xsl:if>
+            <xsl:if test="contains(@rend, 'color:blue')">
+                <span class="font-weight-bold" style="font-size: large; color: #3939c6">
+                    <xsl:apply-templates mode="original-version"/>
+                </span>
+            </xsl:if>
+        </xsl:if>
+    </xsl:template>
+    
+    <!-- Contenu à ne pas afficher -->
+    <xsl:template match="TEI//body//expan" mode="original-version"/>
+    <xsl:template match="TEI//body//reg" mode="original-version"/>
+    <xsl:template match="TEI//body//corr" mode="original-version"/>
+    <xsl:template match="TEI//body//certainty" mode="original-version"/>
     
     <!-- OCCURRENCES PERSONNAGES -->
     <xsl:template name="textometry-perso">
