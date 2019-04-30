@@ -622,7 +622,7 @@
         <span class="badge badge-light popup">
             <xsl:apply-templates mode="normalised-version"/>
             <xsl:if test="@ref">
-                <span class="popuptext show" id="{$persId}">
+                <span class="popuptext" id="{$persId}">
                     <xsl:value-of select="$persDesc"/>
                 </span>
             </xsl:if>
@@ -652,7 +652,7 @@
         <span class="badge badge-light popup" onclick="popUp()">
             <xsl:apply-templates mode="normalised-version"/>
             <xsl:if test="@ref">
-                <span class="popuptext show" id="{$placeId}">
+                <span class="popuptext" id="{$placeId}">
                     <xsl:value-of select="$placeDesc"/>
                 </span>
             </xsl:if>
@@ -812,7 +812,7 @@
         <span class="badge badge-light popup">
             <xsl:apply-templates mode="original-version"/>
             <xsl:if test="@ref">
-                <span class="popuptext show" id="{$persId}">
+                <span class="popuptext" id="{$persId}">
                     <xsl:value-of select="$persDesc"/>
                 </span>
             </xsl:if>
@@ -842,7 +842,7 @@
         <span class="badge badge-light popup" onclick="popUp()">
             <xsl:apply-templates mode="original-version"/>
             <xsl:if test="@ref">
-                <span class="popuptext show" id="{$placeId}">
+                <span class="popuptext" id="{$placeId}">
                     <xsl:value-of select="$placeDesc"/>
                 </span>
             </xsl:if>
