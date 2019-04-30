@@ -1,0 +1,332 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <meta charset="UTF-8">
+      <meta name="author" content="Ségolène &amp; Timothé ALBOUY">
+      <meta name="description" content="Édition numérique de la Vie de saint Sixte dans le manuscrit Français 412 de la Bibliothèque nationale de France - Département des&#xA;                     manuscrits">
+      <meta name="keywords" content="XSLT,XML,TEI">
+      <link rel="icon" type="image/png" href="IMAGE/favicon.png"><style>
+            @font-face {
+            font-family: 'symbolaregular';
+            src: 
+                url('FONT/symbola-webfont.woff') format('woff'),
+                url('FONT/symbola-webfont.woff2') format('woff2');
+            }
+            
+            body {
+            font-family: 'symbolaregular';
+            }
+        </style><title>Vie de saint Sixte | Édition</title><style>
+                        /* Popup container - can be anything you want */
+                        .popup {
+                        position: relative;
+                        display: inline-block;
+                        cursor: pointer;
+                        -webkit-user-select: none;
+                        -moz-user-select: none;
+                        -ms-user-select: none;
+                        user-select: none;
+                        }
+                        
+                        /* The actual popup */
+                        .popup .popuptext {
+                        visibility: hidden;
+                        width: 160px;
+                        background-color: #555;
+                        color: #fff;
+                        text-align: center;
+                        border-radius: 6px;
+                        padding: 8px 0;
+                        position: absolute;
+                        z-index: 1;
+                        bottom: 125%;
+                        left: 50%;
+                        margin-left: -80px;
+                        }
+                        
+                        /* Popup arrow */
+                        .popup .popuptext::after {
+                        content: "";
+                        position: absolute;
+                        top: 100%;
+                        left: 50%;
+                        margin-left: -5px;
+                        border-width: 5px;
+                        border-style: solid;
+                        border-color: #555 transparent transparent transparent;
+                        }
+                        
+                        /* Toggle this class - hide and show the popup */
+                        .popup .show {
+                        visibility: visible;
+                        -webkit-animation: fadeIn 1s;
+                        animation: fadeIn 1s;
+                        }
+                        
+                        /* Add animation (fade in the popup) */
+                        @-webkit-keyframes fadeIn {
+                        from {opacity: 0;} 
+                        to {opacity: 1;}
+                        }
+                        
+                        @keyframes fadeIn {
+                        from {opacity: 0;}
+                        to {opacity:1 ;}
+                        }
+                    </style></head>
+   <body>
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark justify-content-between"><a class="navbar-brand" href="/">Accueil</a><ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="edition.html">Transcription</a></li>
+            <li class="nav-item"><a class="nav-link" href="facsimile-interactif.html">Fac-similé</a></li>
+            <li class="nav-item"><a class="nav-link" href="textometrie.html">Textométrie</a></li>
+            <li class="nav-item"><a class="nav-link" href="notice.html">Notice</a></li>
+            <li class="nav-item"><a class="nav-link" href="bibliographie.html">Bibliographie</a></li>
+            <li class="nav-item"><a class="nav-link" href="a-propos.html">À propos</a></li>
+         </ul>
+      </nav>
+      <div class="container p-4">
+         <div class="col-md-6"></div>
+         <div class="col-md-6">
+            <p class="paragraph"><span class="font-weight-bold" style="color: #c63939"><span class="line">Ci comen-</span><br><span class="line">ce la vie  et  la passion seint <span class="badge badge-light">Syxte</span> le bene-</span><br><span class="line">oit martyr Nostre Signor <span class="badge badge-light">JesuCrist</span>.</span><br></span></p>
+            <p class="paragraph"><span class="line"><span class="font-weight-bold" style="font-size: large; color: #3939c6">C</span><span class="font-weight-bold" style="font-size: large; color: #c63939">E</span> fu el tens</span><br><small class="text-muted" style="margin-left: -3em">5</small><span class="line" style="margin-left: 2em">qe <span class="badge badge-light">Decius
+                     Ce-</span></span><br><span class="line"><span class="badge badge-light">sar</span> fu
+                  emper-</span><br><span class="line">eres qe cil qi</span><br><span class="line">Nostre Signor</span><br><span class="line">apeloient</span><br><small class="text-muted" style="margin-left: -3em">10</small><span class="line" style="margin-left: 25px">estoient</span><br><span class="line">martyrié</span><br><span class="line"> et  soffroient</span><br><span class="line">griez tormenz</span><br><span class="line">por l’amor de Lui. <span class="font-weight-bold" style="font-size: large; color: #c63939">E</span>n cel tens estoit mes</span><br><small class="text-muted" style="margin-left: -3em">15</small><span class="line" style="margin-left: 25px">sires seins <span class="badge badge-light">Syxtes</span> qi estoit
+                  néz d’<span class="badge badge-light popup" onclick="popUp()">Athenes<span class="popuptext" id="Athenes">Lieu de naissance de Saint Sixte.</span></span><script>
+            var placeId = Athenes
+            function popUp() {
+                window.addEventListener("DOMContentLoaded", (event) => {
+                    var popup = document.getElementById(placeId);
+                    popup.toggle("show");
+                });
+            }
+            
+        </script>.</span><br><span class="line">Phylosophes fu premiers  et  puis ensivi</span><br><span class="line">les oeuvres Nostre Signor <span class="badge badge-light">JesuCrist</span> mout</span><br><span class="line">veraiement  ;  evesqes à <span class="badge badge-light popup" onclick="popUp()">Rome<span class="popuptext" id="Rome">Lieu de l’action et diocèse de l’évêque saint Sixte.</span></span><script>
+            var placeId = Rome
+            function popUp() {
+                window.addEventListener("DOMContentLoaded", (event) => {
+                    var popup = document.getElementById(placeId);
+                    popup.toggle("show");
+                });
+            }
+            
+        </script> de ceus qi</span><br><span class="line">Nostre Signor et saide reclamoient,  et  molt</span><br><small class="text-muted" style="margin-left: -3em">20</small><span class="line" style="margin-left: 25px">les ensegnoit docement de veraie doctri-</span><br><span class="line">ne. <span class="font-weight-bold" style="font-size: large; color: #c63939">Q</span>ant <span class="badge badge-light">Decius Cesar</span> et  li prevoz sorent</span><br><span class="line"> et virent,  qe la crestientéz monteplioit</span><br><span class="line">par le seint home qi <span class="badge badge-light">Syxtes</span>
+                  avoit non  ;  il</span><br><span class="line">commanderent qe l’en l’amenast devant</span><br><small class="text-muted" style="margin-left: -3em">25</small><span class="line" style="margin-left: 25px">els parnuit,  et  lui  et  ses clers dedenz la
+                  cité.</span><br><span class="line"><span class="font-weight-bold" style="font-size: large; color: #c63939">L</span>ors dist seinz <span class="badge badge-light">Syxtes</span>à  ses clers qant il</span><br><span class="line">oï les messages por aus reconforter  : "Mi</span><br><span class="line">chier frere
+                   et  mi chier compaignon,  n’aiéz</span><br><span class="line">nule
+                  poor, vos savéz bien com granz</span><br><small class="text-muted" style="margin-left: -3em">30</small><span class="line" style="margin-left: 25px">tormenz tuit
+                  li seint ont soffert,  pour</span><br><span class="line">parvenir
+                  seurement à  la vie pardurable,  et </span><br><span class="line">Nostre
+                  Sires <span class="badge badge-light">JesuCrist</span> meesmement
+                  souf</span><br><span class="line">fir mort  et 
+                  passion por nostre salu,  et  si nos</span><br><span class="line">dona
+                  example."  Et  qant li seinz hom ot ce</span><br><small class="text-muted" style="margin-left: -3em">35</small><span class="line" style="margin-left: 25px">dit ;  il s’escria à  haute voiz,  et  si dist "Venéz</span><br><span class="line">en,  et  si ni ait celui qi donne nule
+                  poor." </span><br><span class="line">Donc li respondirent, <span class="badge badge-light">Felicismes</span>,  et <span class="badge badge-light">Agapi</span>, </span><br><span class="line">ces qi si deciple estoient,  et  si distrent
+                   : "<span class="font-weight-bold" style="font-size: large; color: #c63939">O</span>ù</span><br><span class="line">porrons nos
+                  aler sanz toi qi ies nostre pere  ? "</span><br><small class="text-muted" style="margin-left: -3em">40</small><span class="line" style="margin-left: 25px"><span class="font-weight-bold" style="font-size: large; color: #c63939"> À </span> cele ore tot
+                  parnuit fu seinz <span class="badge badge-light">Syxtes</span> me-</span><br><span class="line">néz devant l’empereor et  devant le prevost, </span><br><span class="line"> et  li duz dyacre ensamble olui. <span class="font-weight-bold" style="font-size: large; color: #c63939">L</span>ors par-</span><br><span class="line">la li empereres au seint home
+                   et  si dist  : "<span class="font-weight-bold" style="font-size: large; color: #c63939">S</span>éz</span><br><span class="line">tu por qel chose tu ies pris  et 
+                  amenéz de-</span><br><small class="text-muted" style="margin-left: -3em">45</small><span class="line" style="margin-left: 25px">vant moi
+                   ? "<span class="font-weight-bold" style="font-size: large; color: #c63939">S</span>ainz <span class="badge badge-light">Syxtes</span> respondi gel</span><br><span class="line">sai bien. <span class="badge badge-light"><span class="font-weight-bold" style="font-size: large; color: #c63939">D</span>ecius Cesar</span> li dist  : "<span class="font-weight-bold" style="font-size: large; color: #c63939">S</span>e tu le séz</span><br><span class="line">bien ;  fai aussi qe
+                  tuit le facent,  si qe tu</span><br><span class="line">puisses vivre  et  ti
+                  clerc acroistre  ? "Li seins</span><br><span class="line">hom li respondi  : "<span class="font-weight-bold" style="font-size: large; color: #c63939">J</span>e ai fait  et  faz
+                  veraie-</span><br><small class="text-muted" style="margin-left: -3em">50</small><span class="line" style="margin-left: 25px">ment qe mes clergies
+                  acroisse." <span class="badge badge-light"><span class="font-weight-bold" style="font-size: large; color: #3939c6">D</span>ecius</span> li</span><br><span class="line">dist  : "<span class="font-weight-bold" style="font-size: large; color: #c63939">D</span>ont sacrefie à  nos dex qi ne sont mie</span><br><span class="line">mortel,  et  si
+                  soies princes des prestres." <span class="font-weight-bold" style="font-size: large; color: #c63939">S</span>einz</span><br><span class="line"><span class="badge badge-light">Syxtes</span> li respondi
+                   : "J’ai toz tens sacrefie  et 
+                  en-</span><br><span class="line">core sacrefie je pure
+                  oiste  et pardurable,  et </span><br><small class="text-muted" style="margin-left: -3em">55</small><span class="line" style="margin-left: 25px">sanz tache à <span class="badge badge-light">Deu Le Pere Tout Puissant</span>,  et </span><br><span class="line">Nostre Signor
+                  <span class="badge badge-light">JesuCrist</span>Son Fil  et  au
+                  <span class="badge badge-light">Seint </span></span><br><span class="line"><span class="badge badge-light">Esperit</span>." <span class="badge badge-light"><span class="font-weight-bold" style="font-size: large; color: #c63939">D</span>ecius</span> dist
+                   : "Conseille toi
+                   et  ton cler-</span><br><span class="line">gie aussi com nos vos
+                  consellons." <span class="font-weight-bold" style="font-size: large; color: #c63939">S</span>einz</span><br><span class="line"><span class="badge badge-light">Syxtes</span> respondi
+                   : "<span class="font-weight-bold" style="font-size: large; color: #c63939">T</span>res
+                  qa ore avéconsellié</span><br><small class="text-muted" style="margin-left: -3em">60</small><span class="line" style="margin-left: 25px"> et  moi  et  mon clergie qe je
+                  les puisse toz</span><br><span class="line">delivrer,  et 
+                  oster de la mort pardurable." <span class="badge badge-light">Deci-</span></span><br><span class="line"><span class="badge badge-light">uz</span> li dist
+                   : "Sacrefie
+                  à  noz dex,  et  se tu ce ne</span><br><span class="line">vius fere ;  saces qe tuit li autre porront</span><br><span class="line">à  toi prendre
+                  example." <span class="font-weight-bold" style="font-size: large; color: #c63939">S</span>einz
+                  <span class="badge badge-light">Syxtes</span> respon-</span><br><small class="text-muted" style="margin-left: -3em">65</small><span class="line" style="margin-left: 25px">di  : "Je t’ai ja une foiz dit qe je faz
+                  sacrefice</span><br><span class="line">à Mon <span class="badge badge-light">Deu</span> et à Nostre Signor <span class="badge badge-light">JesuCrist</span> son</span><br><span class="line">Fil." <span class="font-weight-bold" style="font-size: large; color: #c63939">L</span>ors
+                  dist <span class="badge badge-light">Decyus Cesar</span>à  ses chevaliers
+                   : </span><br><span class="line">"Prenés le  et  si le menéz au temple martyr, </span><br><span class="line"> et  si face
+                  sacrefice au deu  et  se il ce ne velt</span><br><small class="text-muted" style="margin-left: -3em">70</small><span class="line" style="margin-left: 25px">faire metéz le
+                  emprisson en la chartre</span><br><span class="line">de
+                  <span class="badge badge-light popup" onclick="popUp()">Roarnertine<span class="popuptext" id="Roarnertine">Lieu de provenance d'une certaine charte.</span></span><script>
+            var placeId = Roarnertine
+            function popUp() {
+                window.addEventListener("DOMContentLoaded", (event) => {
+                    var popup = document.getElementById(placeId);
+                    popup.toggle("show");
+                });
+            }
+            
+        </script>." </span><br></p>
+            <p class="paragraph"><span class="line"><span class="font-weight-bold" style="font-size: large; color: #3939c6">L</span>ors fu menéz li seins hom au</span><br><span class="line">temple de lor deu qi <span class="badge badge-light">Mars</span>
+                  estoit</span><br><span class="line">apeléz,  et  là  le commencierent li</span><br><small class="text-muted" style="margin-left: -3em">75</small><span class="line" style="margin-left: 25px">chevalier à  constraindre q’il li feist sacre-</span><br><span class="line">fice. Li seinz hom lor dist  : "He
+                  maleureus</span><br><span class="line">qi aoréz  et 
+                  reqeréz aide à  ces ydoles,  qi sont</span><br><span class="line">veines  et  faites
+                  par main d’ome,  et  qi sont</span><br><span class="line">mues  et  sordes ne ne pueent
+                  à  eles aidier</span><br><small class="text-muted" style="margin-left: -3em">80</small><span class="line" style="margin-left: 25px">ne à  autrui. <span class="font-weight-bold" style="font-size: large; color: #c63939">M</span>i biau fil oéz moi  et  enten-</span><br><span class="line">déz.  et  li delivréz vos ames
+                  des pardurables</span><br><span class="line">tormenz,  et  si ne creniéz mie les
+                  tormenz</span><br><span class="line">de cest siecle  ; <span class="font-weight-bold" style="font-size: large; color: #c63939">M</span>és ceus qi sont pardurable, </span><br><span class="line"> et 
+                  si recevéz  et  faites penitance car voz</span><br><small class="text-muted" style="margin-left: -3em">85</small><span class="line" style="margin-left: 25px">sacrefiéz as ydoles aussi concil qi mielz ne</span><br><span class="line">sevent." <span class="font-weight-bold" style="font-size: large; color: #c63939">Q</span>ant cil qi là  l’avoient mené</span><br><span class="line">oïrent q’il despisoit le commandement l’<span class="badge badge-light">em-</span></span><br><span class="line"><span class="badge badge-light">pereor</span> ;  il l’enmenerent vers la prisson</span><br><span class="line">où l’en lor avoit comandé et  aveqes lui</span><br><small class="text-muted" style="margin-left: -3em">90</small><span class="line" style="margin-left: 25px">les .II. dyacres <span class="badge badge-light">Felicisme</span> et <span class="badge badge-light">Agapite</span>.</span><br></p>
+            <p class="paragraph"><span class="line"><span class="font-weight-bold" style="font-size: large; color: #3939c6">Q</span>uant seinz <span class="badge badge-light">Lorenz</span>,  qi dont
+                  estoit</span><br><span class="line">arcedyacres,  oï et connut con en</span><br><span class="line">menoit seint <span class="badge badge-light">Syxte</span>
+                  l’evesqe  ; </span><br><span class="line">ille commenca à  parler en ceste maniere</span><br><small class="text-muted" style="margin-left: -3em">95</small><span class="line" style="margin-left: 25px"> et  si dist  : "<span class="font-weight-bold" style="font-size: large; color: #c63939">B</span>iaus peres oùvas tu sans ton</span><br><span class="line">fil
+                   ? <span class="font-weight-bold" style="font-size: large; color: #c63939">E</span>t oùvas
+                  tu qi ies seinz prestres,  sanz</span><br><span class="line">ton dyacre
+                   ? <span class="font-weight-bold" style="font-size: large; color: #c63939">T</span>u ne sacrefias
+                  onqes sanz</span><br><span class="line">menistre ne si ne
+                  l’as mie acostume. Et qel</span><br><span class="line">chose desplest ore
+                  à  ta seinte Paternité de mor ? </span><br><small class="text-muted" style="margin-left: -3em">100</small><span class="line" style="margin-left: 1em"><span class="font-weight-bold" style="font-size: large; color: #c63939">A</span>s me tu donc prove de nule rien q’il
+                  vene-</span><br><span class="line">ne soit  et vraie." <span class="font-weight-bold" style="font-size: large; color: #c63939">D</span>onc
+                  respondi sains <span class="badge badge-light">Syxtes</span></span><br><span class="line">à  seint <span class="badge badge-light">Lorenz</span>,  et  si li dist  : "<span class="font-weight-bold" style="font-size: large; color: #c63939">B</span>iaus fuiz, je
+                  ne</span><br><span class="line">te relenqis mie ne ne deguerpiz,  més plus</span><br><span class="line">grant estrif  et  plus grief torment te sont</span><br><small class="text-muted" style="margin-left: -3em">105</small><span class="line" style="margin-left: 1em">doné
+                  et t’atendent. <span class="font-weight-bold" style="font-size: large; color: #c63939">N</span>os recevons le
+                  cours</span><br><span class="line">de legiere
+                  peine aussi com viel home,  et  toi</span><br><span class="line">atent plus
+                  glorieuse victoire einsi comme</span><br><span class="line">jovencel. <span class="font-weight-bold" style="font-size: large; color: #c63939">L</span>esse le plorer car tu vendras
+                  aprés</span><br><span class="line">moi,  et  si
+                  m’enfuiras qi ies dyacres au chief</span><br><small class="text-muted" style="margin-left: -3em">110</small><span class="line" style="margin-left: 1em">de .III. jors. <span class="font-weight-bold" style="font-size: large; color: #c63939">I</span>l n’afiert mie à  toi qe tu recoi-</span><br><span class="line">ves passion desouz mestre aussi comme
+                  se</span><br><span class="line">tu queroies aide. <span class="font-weight-bold" style="font-size: large; color: #c63939">E</span>t por qoi demandes tu</span><br><span class="line">ne reqiers compaignie de ta passion
+                   ?  Je</span><br><span class="line">te deguerpiz tot mon iretage,  et  por qoi</span><br><small class="text-muted" style="margin-left: -3em">115</small><span class="line" style="margin-left: 1em">me vielz tu veoir  ? <span class="font-weight-bold" style="font-size: large; color: #c63939">E</span>lyes deguerpi Helyseum</span><br><span class="line"> et  si ne li toli mie sa vertu." <span class="font-weight-bold" style="font-size: large; color: #c63939">Q</span>ant il ot ce</span><br><span class="line">dit,  si li commanda q’il preist toz les
+                  tresors</span><br><span class="line">de l’yglise,  si les departist  et  donast là 
+                  où il</span><br><span class="line">seust q’il fussent mielz emploiés. Lors do-</span><br><small class="text-muted" style="margin-left: -3em">120</small><span class="line" style="margin-left: 1em">na seint <span class="badge badge-light">Syxte</span>à  seint
+                  <span class="badge badge-light">Lorens</span> le dyacre tou-</span><br><span class="line">tes les facultéz  et  les avoirs de l’yglisse.</span><br><span class="line"><span class="font-weight-bold" style="font-size: large; color: #c63939">E</span>t donc prist seins
+                  <span class="badge badge-light">Lorens</span>,  la poeste del
+                  seint</span><br><span class="line">evesqe,  si commenca a enquerrépartout là 
+                  où</span><br><span class="line">li clerc estoient  et  li povre,  si portoit
+                  avec</span><br><small class="text-muted" style="margin-left: -3em">125</small><span class="line" style="margin-left: 1em">lui les avoirs  ;  si les donoit là  où
+                  mestiers</span><br><span class="line">estoit. <span class="font-weight-bold" style="font-size: large; color: #c63939">E</span>t aprés vint
+                  enz el <span class="badge badge-light popup" onclick="popUp()">mont de Celyon<span class="popuptext" id="Celyon">Colline sur laquelle se trouve la maison de Cyriace.</span></span><script>
+            var placeId = Celyon
+            function popUp() {
+                window.addEventListener("DOMContentLoaded", (event) => {
+                    var popup = document.getElementById(placeId);
+                    popup.toggle("show");
+                });
+            }
+            
+        </script></span><br><span class="line">à  la meson d’une veue deme qi
+                  l’amanoit, </span><br><span class="line">qi .XI. anz avoit esté avec son baron,  et </span><br><span class="line">.XXVII. anz veue,  cele feme <span class="font-weight-bold" style="font-size: large; color: #c63939">a</span>voit en sa</span><br><small class="text-muted" style="margin-left: -3em">130</small><span class="line" style="margin-left: 1em">meson molt de crestienz,  repoz,  prestres
+                   et </span><br><span class="line">clers  et  por la poor des tyranz. <span class="font-weight-bold" style="font-size: large; color: #c63939">Q</span>ant seinz</span><br><span class="line"><span class="badge badge-light">Lorenz</span> le sot,  il
+                  vint parnuit,  si lor aporta</span><br><span class="line">vesteures  et  avoirs  et  aprés lor lava toz</span><br><span class="line">les piéz. <span class="font-weight-bold" style="font-size: large; color: #c63939">Q</span>ant il ot ce
+                  fet  ;  la veue feme</span><br><small class="text-muted" style="margin-left: -3em">135</small><span class="line" style="margin-left: 1em">en cui meson il estoient  ;  se lessa cheoir</span><br><span class="line">as piez saint <span class="badge badge-light">Lorenz</span> et  si
+                  li dist  : </span><br></p>
+            <p class="paragraph"><span class="line">"<span class="font-weight-bold" style="font-size: large; color: #3939c6">J</span><span class="font-weight-bold" style="font-size: large; color: #c63939">E</span> te pri  et  conjur de parNostre
+                  Signor <span class="badge badge-light">Jesu</span></span><br><span class="line"><span class="badge badge-light">Crist</span>,  qe tu me metes tes meins sor
+                  mon</span><br><span class="line">chief,  car je iai molt
+                  grant doleur  et molt</span><br><small class="text-muted" style="margin-left: -3em">140</small><span class="line" style="margin-left: 1em">tres grant
+                  enfermeté."  Lors dist seinz <span class="badge badge-light">Lorenz</span></span><br><span class="line">à  la feme qi <span class="badge badge-light">Cyriace</span>
+                  estoit apelee  : "Je te me-</span><br><span class="line">terai ma mein sor ton chief <span class="font-weight-bold" style="font-size: large; color: #c63939">E</span>l non Nostre</span><br><span class="line">Signeur <span class="badge badge-light">Jesu</span> le Fiuz <span class="badge badge-light">Deu</span>." <span class="font-weight-bold" style="font-size: large; color: #c63939">E</span>t lors li fist</span><br><span class="line">le signe de la vraie croiz seur son chief,  et  si
+                  li</span><br><small class="text-muted" style="margin-left: -3em">145</small><span class="line" style="margin-left: 1em">mist ses meins deseure  et  puis mist deseur</span><br><span class="line">li le drap dont l’en essuiot les piéz des seinz</span><br><span class="line">homes qi là  estoient. <span class="font-weight-bold" style="font-size: large; color: #c63939">E</span>t
+                  tantost fu ele ga-</span><br><span class="line">rie de la grant enfermeté. En cele meisme</span><br><span class="line">nuit se departi seinz <span class="badge badge-light">Lorenz</span> de là ,  et  si commenca</span><br><small class="text-muted" style="margin-left: -3em">150</small><span class="line" style="margin-left: 1em">aquerré les crestienz partout là  où il estoi-</span><br><span class="line">ent assamblé ;  fust en mesons ou en crou-</span><br><span class="line">tes ou en autres leus,  tant qe il vint en</span><br><span class="line">la rue <span class="badge badge-light popup" onclick="popUp()">del
+                     charnier<span class="popuptext" id="RueCharnier">Rue où se trouve la maison de Nartyses.</span></span><script>
+            var placeId = RueCharnier
+            function popUp() {
+                window.addEventListener("DOMContentLoaded", (event) => {
+                    var popup = document.getElementById(placeId);
+                    popup.toggle("show");
+                });
+            }
+            
+        </script>,  et  là  trova il molt de</span><br><span class="line">crestiens assambléz à  la meson d’un crestien</span><br><small class="text-muted" style="margin-left: -3em">155</small><span class="line" style="margin-left: 1em">qi <span class="badge badge-light">Nartyses</span> estoit apeléz. <span class="font-weight-bold" style="font-size: large; color: #c63939">Q</span>ant seinz
+                  <span class="badge badge-light">Lorenz</span></span><br><span class="line">i fu entréz tot plorant,  il lor lava les piéz</span><br><span class="line"> et  si lor dona de l’avoir qe seinz <span class="badge badge-light">Syxtes</span> avoit</span><br><span class="line">commandéà  doner as povres. <span class="font-weight-bold" style="font-size: large; color: #c63939">E</span>n cele meson</span><br><span class="line">trova il .I. home qi estoit avugles si avoit</span><br><small class="text-muted" style="margin-left: -3em">160</small><span class="line" style="margin-left: 1em">non cressencies,  et  cil li commenca à  proier
+                  tot</span><br><span class="line">emplorant  et à  dire  : "<span class="font-weight-bold" style="font-size: large; color: #c63939">S</span>eins hom a
+                  touché mes</span><br><span class="line">iols de ces meins si qe je puisse
+                  veoir ta face." </span><br><span class="line"><span class="font-weight-bold" style="font-size: large; color: #c63939">D</span>onc commenca li seinz
+                  amis <span class="badge badge-light">Deu</span>à  dire  : "Nostre</span><br><span class="line">Sire <span class="badge badge-light">JesuCrist</span> qi aovri les iols del
+                  avugle  ; </span><br><small class="text-muted" style="margin-left: -3em">165</small><span class="line" style="margin-left: 1em">te puisse
+                  enluminer."  Et  tantost com il ot</span><br><span class="line">fet le signe de la veraie croiz Nostre Signor</span><br><span class="line">sor ses iols  ;  cil vit la lumiere  et  saint
+                  <span class="badge badge-light">Lorenz</span></span><br><span class="line">einsi q’il li avoit requis.</span><br></p>
+            <p class="paragraph"><span class="line"><span class="font-weight-bold" style="font-size: large; color: #3939c6">L</span>ors s’en departi seinz <span class="badge badge-light">Lorenz</span>,  et  si oï</span><br><small class="text-muted" style="margin-left: -3em">170</small><span class="line" style="margin-left: 1em">dire qe en la rue qi estoit apelee</span><br><span class="line"><span class="badge badge-light popup" onclick="popUp()">Patrisse<span class="popuptext" id="RuePatrisse">Rue où se trouve une crypte où se sont dissimulés de nombreux
+                        chrétiens.</span></span><script>
+            var placeId = RuePatrisse
+            function popUp() {
+                window.addEventListener("DOMContentLoaded", (event) => {
+                    var popup = document.getElementById(placeId);
+                    popup.toggle("show");
+                });
+            }
+            
+        </script> avoit molt de crestienz</span><br><span class="line">assambléz en une croute  et  là vint il à aus</span><br><span class="line"> et  si porta avec lui ce qe mestiers estoit à 
+                  els, </span><br><span class="line"> et  si en i avoit bien assambléz qe homes qe</span><br><small class="text-muted" style="margin-left: -3em">175</small><span class="line" style="margin-left: 1em">femes .LXIII. <span class="font-weight-bold" style="font-size: large; color: #c63939">E</span>t lors les
+                  baisa seinz <span class="badge badge-light">Lorens</span></span><br><span class="line">tot emplorant,  et  si lor dona pais,  là 
+                  trova</span><br><span class="line">il un prestre qi parnon estoit apeléz <span class="badge badge-light">Justins</span></span><br><span class="line">qe seinz <span class="badge badge-light">Syxtes</span> avoit
+                  ordené. <span class="font-weight-bold" style="font-size: large; color: #c63939">Q</span>ant seinz</span><br><span class="line"><span class="badge badge-light">Lorenz</span> le vit,  il
+                  se mist à jenols sor le pave-</span><br><small class="text-muted" style="margin-left: -3em">180</small><span class="line" style="margin-left: 1em">ment por baisier ses piéz. <span class="font-weight-bold" style="font-size: large; color: #c63939">E</span>t seins <span class="badge badge-light">Justins</span></span><br><span class="line">se remist aussi à  genoz,  por baisier les piéz</span><br><span class="line">seint <span class="badge badge-light">Lorens</span>. <span class="font-weight-bold" style="font-size: large; color: #c63939">A</span> ce faire mistrent il grant</span><br><span class="line">pieté qe li uns ne lessoit beisier ses piéz à </span><br><span class="line">l’autre. Et donc dist seinz <span class="badge badge-light">Lorenz</span> : "<span class="font-weight-bold" style="font-size: large; color: #c63939">B</span>iaus</span><br><small class="text-muted" style="margin-left: -3em">185</small><span class="line" style="margin-left: 1em">sire raemplissiéz mon
+                  desirier  et  si me les-</span><br><span class="line">-siéz laver voz
+                  piéz,  et  les piéz de ces seins ho-</span><br><span class="line">mes qi ceiens sont à 
+                  mes meins." <span class="font-weight-bold" style="font-size: large; color: #c63939">S</span>eins</span><br><span class="line"><span class="badge badge-light"><span class="font-weight-bold" style="font-size: large; color: #c63939">J</span>ustins</span> li prestres li respondi  : "<span class="font-weight-bold" style="font-size: large; color: #c63939">L</span>e est li cou-</span><br><span class="line">mandemenz Nostre Signor ;  feites vostre</span><br><small class="text-muted" style="margin-left: -3em">190</small><span class="line" style="margin-left: 1em">volenté,  el non
+                  dame<span class="badge badge-light">Deu</span><span class="badge badge-light">JesuCrist</span>."  Lors mi-</span><br><span class="line">strent de l’eue en un vaissel,  et  seinz
+                  <span class="badge badge-light">Lorenz</span></span><br><span class="line">lava les piéz de toz les seinz homes qi lai-</span><br><span class="line">enz estoient. <span class="font-weight-bold" style="font-size: large; color: #c63939">Q</span>ant il
+                  vint à  seint <span class="badge badge-light">Justin</span></span><br><span class="line">illi commenca à  laver les piéz  et à  beisier.
+                  Et</span><br><small class="text-muted" style="margin-left: -3em">195</small><span class="line" style="margin-left: 1em">qant il ot ce fet  ;  il se commanda à  seint
+                  <span class="badge badge-light">Justin</span></span><br><span class="line">le prestre,  et  si se departi de là à  cele
+                  hore.</span><br></p>
+            <p class="paragraph"><span class="line"><span class="font-weight-bold" style="font-size: large; color: #3939c6">A</span>
+                  donc vit seinz <span class="badge badge-light">Lorenz</span> con en me-</span><br><span class="line">noit seint <span class="badge badge-light">Syxte</span>,  et  aveuqes les</span><br><span class="line">.II. dyacres seint <span class="badge badge-light">Felicisme</span>,  et  seint</span><br><small class="text-muted" style="margin-left: -3em">200</small><span class="line" style="margin-left: 1em"><span class="badge badge-light">Agapite</span> devant <span class="badge badge-light">Decie Cesar</span> l’empereor,  et </span><br><span class="line">devant <span class="badge badge-light">Valerien</span> le
+                  prevost. <span class="font-weight-bold" style="font-size: large; color: #c63939">Q</span>ant <span class="badge badge-light">Decies</span></span><br><span class="line">vit seint <span class="badge badge-light">Syxte</span>, 
+                  si li dist  : "<span class="font-weight-bold" style="font-size: large; color: #c63939">N</span>os te conseillons</span><br><span class="line">por ce qe tu es vielz
+                  hom,  qe tu faces mes</span><br><span class="line">commandemenz,  et 
+                  si sacrefie à  noz dex." <span class="font-weight-bold" style="font-size: large; color: #c63939">S</span>eins</span><br><small class="text-muted" style="margin-left: -3em">205</small><span class="line" style="margin-left: 1em"><span class="badge badge-light">Syxtes</span> respondi
+                   : "Chetif més conseille toi-</span><br><span class="line">si ne me blasme mie  et  pren
+                  ta peneance</span><br><span class="line"> et  si la fai,  por ce
+                  qe tu as tant de sanc de seinz</span><br><span class="line">homes espandu sor
+                  terre." <span class="font-weight-bold" style="font-size: large; color: #c63939">D</span>onc
+                  dist <span class="badge badge-light">Decies
+                     Ce-</span></span><br><span class="line"><span class="badge badge-light">sar</span> qi pleinz
+                  estoit de grant forsenerie à </span><br><small class="text-muted" style="margin-left: -3em">210</small><span class="line" style="margin-left: 1em"><span class="badge badge-light">Valerien</span> : "<span class="font-weight-bold" style="font-size: large; color: #c63939">S</span>e cil n’est
+                  morz,  la poor de toi n’ert</span><br><span class="line">graves cremue." <span class="badge badge-light">Valeriens</span> li respondi cou-</span><br><span class="line">mant l’en q’il ait la teste trenchié. Lors
+                  res-</span><br><span class="line">pondirent seinz <span class="badge badge-light">Agapites</span> et 
+                  seinz <span class="badge badge-light">Felicisme</span>com</span><br><span class="line">qi dyacre estoient,  et  si distrent  : "<span class="font-weight-bold" style="font-size: large; color: #c63939">C</span>hetif se</span><br><small class="text-muted" style="margin-left: -3em">215</small><span class="line" style="margin-left: 1em">vos oéz  et 
+                  entendéz les commandemenz,  et  les</span><br><span class="line">amonestemenz de
+                  Nostre Signor ; vos
+                  por-</span><br><span class="line">riés eschaper des
+                  peines pardurables qi voz</span><br><span class="line">traveilleront  et  tormenteront." <span class="badge badge-light">Valeriens</span></span><br><span class="line">li prevoz dist  : "Por qoi vivent cist si
+                  longe-</span><br><small class="text-muted" style="margin-left: -3em">220</small><span class="line" style="margin-left: 1em">ment qi noz prometent
+                  à avoir si griez</span><br><span class="line">tormenz
+                   ?  Menéz les encore au temple de</span><br><span class="line">noz dex,  et  si
+                  facent sacrefice,  et  se il ne le voe-</span><br><span class="line">lent faire,  si
+                  lor trenché l’en en meismes leu</span><br><span class="line">les
+                  testes." <span class="font-weight-bold" style="font-size: large; color: #c63939">D</span>onc
+                  furent mené li .III. saint</span><br><small class="text-muted" style="margin-left: -3em">225</small><span class="line" style="margin-left: 1em">home au temple qi estoit defors les murs</span><br><span class="line">de la porte qi est apelee <span class="badge badge-light popup" onclick="popUp()">Apie<span class="popuptext" id="PorteApie">Une des portes qui marque la limite de la ville.</span></span><script>
+            var placeId = PorteApie
+            function popUp() {
+                window.addEventListener("DOMContentLoaded", (event) => {
+                    var popup = document.getElementById(placeId);
+                    popup.toggle("show");
+                });
+            }
+            
+        </script>. Lors comenca</span><br><span class="line">seint <span class="badge badge-light">Syxtes</span>à  dire qant
+                  il furent venu al</span><br><span class="line">temple  : "Veéz ici les ydoles veines  et  mues</span><br><span class="line"> et  sordes feites de pierre qe li
+                  chetif enclinent, </span><br><small class="text-muted" style="margin-left: -3em">230</small><span class="line" style="margin-left: 1em"> et aeurent
+                  porce q’il perdent la vie
+                  pardurable." </span><br><span class="line">Lors esgarda il le temple  et  dist  : "<span class="badge badge-light"><span class="font-weight-bold" style="font-size: large; color: #c63939">J</span>esuCriz</span>Li</span><br><span class="line">Fiuz <span class="badge badge-light">Deu</span> te destruise."  Et  tuit cil qi
+                  là  estoient</span><br><span class="line">crestien respondirent amen,  et  meintenant</span><br><span class="line">c<span class="font-weight-bold" style="font-size: large; color: #c63939">h</span>ai une mout grant partie
+                  de<span class="font-weight-bold" style="font-size: large; color: #c63939">L</span> temple, </span><br><small class="text-muted" style="margin-left: -3em">235</small><span class="line" style="margin-left: 1em"> et  si combrisa les ydoles  et  les ymages qi de-</span><br><span class="line">denz estoient.</span><br><span class="line"><span class="font-weight-bold" style="font-size: large; color: #3939c6">Q</span>uant seinz <span class="badge badge-light">Lorenz</span>vit ce qi
+                  avec</span><br><span class="line">aus estoit  ;  il commenca à  crier  et à </span><br><span class="line">dire  : "Seinz peres ne me deguer-</span><br><small class="text-muted" style="margin-left: -3em">240</small><span class="line" style="margin-left: 1em">piz mie. <span class="font-weight-bold" style="font-size: large; color: #c63939">C</span>ar j’ai les tresors toz qe tu me les-</span><br><span class="line">sas departiz  et  donéz as
+                  povrez." <span class="font-weight-bold" style="font-size: large; color: #c63939">Q</span>ant li che-</span><br><span class="line">valier qi la estoient oïrent qe seinz <span class="badge badge-light">Lorenz</span></span><br><span class="line">avoit tresors il le pristrent. <span class="font-weight-bold" style="font-size: large; color: #c63939">E</span>t seint <span class="badge badge-light">Syxtes</span></span><br><span class="line"> et  ses .II. compaignons furent iluec devant</span><br><small class="text-muted" style="margin-left: -3em">245</small><span class="line" style="margin-left: 1em">aus decoler,  et  ce fu fait as victienesydes</span><br><span class="line">d’aoust,  et  la remestrent licors des
+                  seins</span><br><span class="line">martyrs gisant en la place, tresqa la nuit.</span><br><span class="line">qe li prestre  et  li clerc qi dyacre estoient.  et </span><br><span class="line">grans torbes de crestiens pristrent le cors</span><br><small class="text-muted" style="margin-left: -3em">250</small><span class="line" style="margin-left: 1em">seint <span class="badge badge-light">Syxte</span> le beneoit
+                  martyr,  si l’enfoirent</span><br><span class="line">el <span class="badge badge-light popup" onclick="popUp()">cymentiere seint
+                     Calyxte<span class="popuptext" id="CimetiereCalyxte">Lieu où sont enterrés saint Sixte, Felicisme et Agapite.</span></span><script>
+            var placeId = CimetiereCalyxte
+            function popUp() {
+                window.addEventListener("DOMContentLoaded", (event) => {
+                    var popup = document.getElementById(placeId);
+                    popup.toggle("show");
+                });
+            }
+            
+        </script> en cele meisme</span><br><span class="line">voie,  et  là  enfoïrent il en cel meisme
+                  jor</span><br><span class="line">seint <span class="badge badge-light">Felice</span>,  et 
+                  saint <span class="badge badge-light">Agapite</span> qi furent seint</span><br><span class="line">martyr,  et  si sont en joie pardurable oùNo-</span><br><small class="text-muted" style="margin-left: -3em">255</small><span class="line" style="margin-left: 1em">stre Sires <span class="badge badge-light">JesuCriz</span>
+                  nos octroit parvenir. Amen.</span><br></p>
+         </div>
+      </div>
+   </body>
+</html>

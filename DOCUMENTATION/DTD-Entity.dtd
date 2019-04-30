@@ -20,9 +20,9 @@
 <!ENTITY guillemet '<choice><orig>.</orig><reg>"</reg></choice>' >
 <!ENTITY guillemet-ouvrant '<choice><orig>.</orig><reg> : "</reg></choice>' >
 <!ENTITY guillemet-ouvrant0 '<choice><sic></sic><corr> : "</corr></choice>' >
-<!ENTITY guillemet-fermant '<choice><orig>.</orig><reg>."</reg></choice>' >
-<!ENTITY guillemet-fermant0 '<choice><sic></sic><corr>."</corr></choice>' >
-<!ENTITY guillemet-fermant2 '<choice><orig>&#11854;</orig><reg>."</reg></choice>' >
+<!ENTITY guillemet-fermant '<choice><orig>.</orig><reg>." </reg></choice>' >
+<!ENTITY guillemet-fermant0 '<choice><sic></sic><corr>." </corr></choice>' >
+<!ENTITY guillemet-fermant2 '<choice><orig>&#11854;</orig><reg>." </reg></choice>' >
 <!ENTITY tiret0 "<choice><sic></sic><corr>-</corr></choice>" >
 <!ENTITY point "<choice><orig>;</orig><reg>.</reg></choice>" >
 <!ENTITY point0 "<choice><sic></sic><corr>.</corr></choice>" >

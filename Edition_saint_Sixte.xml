@@ -814,7 +814,7 @@
                      &Ss;&y;xte</persName> le bene-</seg>
 
                <seg facs="#l3">oit mart&y;r &Nn;ostre &Ss;ignor <persName ref="#JC"
-                     >&Ji;esu&espace;&Cc;rist</persName></seg>
+                     >&Ji;esu&espace;&Cc;rist</persName>.</seg>
             </p>
             <p>
                <cb n="1"/>
@@ -965,7 +965,7 @@
                      >S</g>ainz <persName ref="#Sixte">&Ss;&y;xtes</persName> respondi gel</seg>
 
                <seg facs="#l46">sai bien. <persName ref="#Dece"><g type="initiale" rend="color:red"
-                        >&Dd;</g>ecius &Cc;esar</persName> li dist &guillemet-ouvrant; <said
+                        >D</g>ecius &Cc;esar</persName> li dist &guillemet-ouvrant; <said
                      who="#Dece" xml:id="De4" next="#De5"><g type="initiale" rend="color:red"
                         >S</g>e tu le s&é;z</said></seg>
 
@@ -978,7 +978,7 @@
                      clerc acroistre &point-interrogation0;</said> &guillemet; &Ll;i seins</seg>
 
                <seg facs="#l49">hom li respondi &guillemet-ouvrant; <said who="#Sixte" xml:id="Si11"
-                     next="#Si12"><g type="initiale" rend="color:red">&Ji;</g>e ai fait &et; faz
+                     next="#Si12"><g type="initiale" rend="color:red">J</g>e ai fait &et; faz
                      &vu;eraie-</said></seg>
                <pb n="2"/>
                <cb n="2"/>

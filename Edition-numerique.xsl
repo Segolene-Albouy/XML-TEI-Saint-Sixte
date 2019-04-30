@@ -12,6 +12,9 @@
         <xsl:variable name="path-index">
             <xsl:text>index.html</xsl:text>
         </xsl:variable>
+        <xsl:variable name="path-edition">
+            <xsl:text>edition.html</xsl:text>
+        </xsl:variable>
         <xsl:variable name="path-facsimile">
             <xsl:text>facsimile-interactif.html</xsl:text>
         </xsl:variable>
@@ -77,28 +80,114 @@
                         </div>
 
                         <div class="row text-center" style="place-content: center">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-warning">
+                                    <a href="{$path-edition}" style="color: black;">Transcription du manuscrit</a>
+                                </button>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-warning">
+                                    <a href="{$path-facsimile}" style="color: black;">Fac-similé
+                                        interactif</a>
+                                </button>
+                            </div>
+                            <div class="col-md-2">
                                 <button type="button" class="btn btn-warning">
                                     <a href="{$path-textometry}" style="color: black;">Analyse
                                         textométrique</a>
                                 </button>
                             </div>
-                            <div class="col-md-3">
-                                <button type="button" class="btn btn-warning">
-                                    <a href="{$path-facsimile}" style="color: black;">Facsimile
-                                        interactif</a>
-                                </button>
-                            </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button type="button" class="btn btn-warning">
                                     <a href="{$path-catalogue-record}" style="color: black;">Notice du manuscrit</a>
                                 </button>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button type="button" class="btn btn-warning">
-                                    <a href="{$path-biblio}" style="color: black;">Bibliographie</a>
+                                    <a href="{$path-biblio}" style="color: black;">Bibliographie sélective</a>
                                 </button>
                             </div>
+                        </div>
+                    </div>
+                </body>
+            </html>
+        </xsl:result-document>
+        
+        <!-- PAGE ÉDITION -->
+        <xsl:result-document href="{$path-edition}" method="html" indent="yes">
+            <html>
+                <head>
+                    <xsl:call-template name="meta-header"/>
+                    <title>
+                        <xsl:value-of select="concat($title, ' | ', 'Édition')"/>
+                    </title>
+                    <style>
+                        /* Popup container - can be anything you want */
+                        .popup {
+                        position: relative;
+                        display: inline-block;
+                        cursor: pointer;
+                        -webkit-user-select: none;
+                        -moz-user-select: none;
+                        -ms-user-select: none;
+                        user-select: none;
+                        }
+                        
+                        /* The actual popup */
+                        .popup .popuptext {
+                        visibility: hidden;
+                        width: 160px;
+                        background-color: #555;
+                        color: #fff;
+                        text-align: center;
+                        border-radius: 6px;
+                        padding: 8px 0;
+                        position: absolute;
+                        z-index: 1;
+                        bottom: 125%;
+                        left: 50%;
+                        margin-left: -80px;
+                        }
+                        
+                        /* Popup arrow */
+                        .popup .popuptext::after {
+                        content: "";
+                        position: absolute;
+                        top: 100%;
+                        left: 50%;
+                        margin-left: -5px;
+                        border-width: 5px;
+                        border-style: solid;
+                        border-color: #555 transparent transparent transparent;
+                        }
+                        
+                        /* Toggle this class - hide and show the popup */
+                        .popup .show {
+                        visibility: visible;
+                        -webkit-animation: fadeIn 1s;
+                        animation: fadeIn 1s;
+                        }
+                        
+                        /* Add animation (fade in the popup) */
+                        @-webkit-keyframes fadeIn {
+                        from {opacity: 0;} 
+                        to {opacity: 1;}
+                        }
+                        
+                        @keyframes fadeIn {
+                        from {opacity: 0;}
+                        to {opacity:1 ;}
+                        }
+                    </style>
+                </head>
+                <body>
+                    <xsl:call-template name="navbar"/>
+                    <div class="container p-4">
+                        <div class="col-md-6">
+                            <xsl:apply-templates select="TEI//body//p" mode="original-version"/>
+                        </div>
+                        <div class="col-md-6">
+                            <xsl:apply-templates select="TEI//body//p" mode="normalised-version"/>
                         </div>
                     </div>
                 </body>
@@ -291,8 +380,8 @@
 
     <!-- NAVBAR -->
     <xsl:template name="navbar">
-        <xsl:variable name="path-index">
-            <xsl:text>index.html</xsl:text>
+        <xsl:variable name="path-edition">
+            <xsl:text>edition.html</xsl:text>
         </xsl:variable>
         <xsl:variable name="path-facsimile">
             <xsl:text>facsimile-interactif.html</xsl:text>
@@ -315,10 +404,13 @@
 
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{$path-textometry}">Analyse textométrique</a>
+                    <a class="nav-link" href="{$path-edition}">Transcription</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{$path-facsimile}">Facsimile interactif</a>
+                    <a class="nav-link" href="{$path-facsimile}">Fac-similé</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{$path-textometry}">Textométrie</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{$path-catalogue-record}">Notice</a>
@@ -360,9 +452,9 @@
         <style>
             @font-face {
             font-family: 'symbolaregular';
-            src: url('/FONT/symbola_hinted-webfont.woff2') format('woff2'),
-            url('FONT/symbola_hinted-webfont.woff') format('woff');
-
+            src: 
+                url('FONT/symbola-webfont.woff') format('woff'),
+                url('FONT/symbola-webfont.woff2') format('woff2');
             }
             
             body {
@@ -370,8 +462,11 @@
             }
         </style>
         <!--
-            src: url('http://edition-saint-sixte.alwaysdata.net/CSS/symbola_hinted-webfont.woff2') format('woff2'),
-            url('http://edition-saint-sixte.alwaysdata.net/CSS/symbola_hinted-webfont.woff') format('woff');
+            url('FONT/symbola-webfont.woff') format('woff'),
+            url('FONT/symbola-webfont.woff'2) format('woff2');
+            
+            url('FONT/symbola_hinted-webfont.woff') format('woff'),
+            url('FONT/symbola_hinted-webfont.woff2') format('woff2');
         -->
     </xsl:template>
 
@@ -399,6 +494,181 @@
             .//g/text()|
             .//roleName/text()"/>
     </xsl:template>
+    
+    <!-- TEXTE TRANSCRIT -->
+    <!-- - - - -VERSION MODERNISÉE - - - - -->
+    <xsl:template match="TEI//body//p" mode="normalised-version">
+        <p class="paragraph">
+            <xsl:choose>
+                <xsl:when test="contains(@rend, 'color:red')">
+                    <span class="font-weight-bold" style="color: #c63939">
+                        <xsl:apply-templates mode="normalised-version"/>
+                    </span>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates mode="normalised-version"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </p>
+    </xsl:template>
+    
+    <xsl:template match="TEI//body//p/seg" mode="normalised-version">
+        <!-- Numérotation des lignes -->
+        <xsl:variable name="line-number">
+            <xsl:value-of select="replace(@facs, '#l', '')"/>
+        </xsl:variable>
+        <xsl:choose>
+            <xsl:when test="string-length($line-number) = 1">
+                <xsl:choose>
+                    <xsl:when test="ends-with($line-number, '0')">
+                        <small class="text-muted" style="margin-left: -3em">
+                            <xsl:value-of select="$line-number"/>
+                        </small>
+                        <span class="line" style="margin-left: 2em">
+                            <xsl:apply-templates mode="normalised-version"/>
+                        </span>
+                        <br/>
+                    </xsl:when>
+                    <xsl:when test="ends-with($line-number, '5')">
+                        <small class="text-muted" style="margin-left: -3em">
+                            <xsl:value-of select="$line-number"/>
+                        </small>
+                        <span class="line" style="margin-left: 2em">
+                            <xsl:apply-templates mode="normalised-version"/>
+                        </span>
+                        <br/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <span class="line">
+                            <xsl:apply-templates mode="normalised-version"/>
+                        </span>
+                        <br/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:when test="string-length($line-number) = 2">
+                <xsl:choose>
+                    <xsl:when test="ends-with($line-number, '0')">
+                        <small class="text-muted" style="margin-left: -3em">
+                            <xsl:value-of select="$line-number"/>
+                        </small>
+                        <span class="line" style="margin-left: 25px">
+                            <xsl:apply-templates mode="normalised-version"/>
+                        </span>
+                        <br/>
+                    </xsl:when>
+                    <xsl:when test="ends-with($line-number, '5')">
+                        <small class="text-muted" style="margin-left: -3em">
+                            <xsl:value-of select="$line-number"/>
+                        </small>
+                        <span class="line" style="margin-left: 25px">
+                            <xsl:apply-templates mode="normalised-version"/>
+                        </span>
+                        <br/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <span class="line">
+                            <xsl:apply-templates mode="normalised-version"/>
+                        </span>
+                        <br/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:when test="string-length($line-number) = 3">
+                <xsl:choose>
+                    <xsl:when test="ends-with($line-number, '0')">
+                        <small class="text-muted" style="margin-left: -3em">
+                            <xsl:value-of select="$line-number"/>
+                        </small>
+                        <span class="line" style="margin-left: 1em">
+                            <xsl:apply-templates mode="normalised-version"/>
+                        </span>
+                        <br/>
+                    </xsl:when>
+                    <xsl:when test="ends-with($line-number, '5')">
+                        <small class="text-muted" style="margin-left: -3em">
+                            <xsl:value-of select="$line-number"/>
+                        </small>
+                        <span class="line" style="margin-left: 1em">
+                            <xsl:apply-templates mode="normalised-version"/>
+                        </span>
+                        <br/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <span class="line">
+                            <xsl:apply-templates mode="normalised-version"/>
+                        </span>
+                        <br/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template match="TEI//body//persName" mode="normalised-version">
+        <xsl:variable name="persId">
+            <xsl:value-of select="replace(@ref, '#', '')"/>
+        </xsl:variable>
+        <xsl:variable name="persDesc">
+            <xsl:value-of select="ancestor::teiHeader//listPerson/person[@xml:id=$persId]/note//text()"/>
+        </xsl:variable>
+        <span class="badge badge-light">
+            <xsl:apply-templates mode="normalised-version"/>
+        </span>
+    </xsl:template>
+    
+    <xsl:template match="TEI//body//placeName" mode="normalised-version">
+        <xsl:variable name="place-Id">
+            <xsl:value-of select="replace(@ref, '#', '')"/>
+        </xsl:variable>
+        <xsl:variable name="placeId">
+            <xsl:value-of select="replace($place-Id, '-', '')"/>
+        </xsl:variable>
+        <xsl:variable name="placeDesc">
+            <xsl:value-of select="ancestor::TEI/teiHeader//listPlace/place[@xml:id=$place-Id]/note[1]//text()"/>
+        </xsl:variable>
+        <span class="badge badge-light popup" onclick="popUp()">
+            <xsl:apply-templates mode="normalised-version"/>
+            <span class="popuptext" id="{$placeId}">
+                <xsl:value-of select="$placeDesc"/>
+            </span>
+        </span>
+        
+        <script>
+            var placeId = <xsl:value-of select="$placeId"/>
+            function popUp() {
+                window.addEventListener("DOMContentLoaded", (event) => {
+                    var popup = document.getElementById(placeId);
+                    popup.toggle("show");
+                });
+            }
+            
+        </script>
+    </xsl:template>
+    
+    <xsl:template match="TEI//body//g" mode="normalised-version">
+        <xsl:if test="@type = 'initiale'">
+            <xsl:if test="contains(@rend, 'color:red')">
+                <span class="font-weight-bold" style="font-size: large; color: #c63939">
+                    <xsl:apply-templates mode="normalised-version"/>
+                </span>
+            </xsl:if>
+            <xsl:if test="contains(@rend, 'color:blue')">
+                <span class="font-weight-bold" style="font-size: large; color: #3939c6">
+                    <xsl:apply-templates mode="normalised-version"/>
+                </span>
+            </xsl:if>
+        </xsl:if>
+    </xsl:template>
+    
+    <!-- Contenu à ne pas afficher -->
+    <xsl:template match="TEI//body//abbr" mode="normalised-version"/>
+    <xsl:template match="TEI//body//orig" mode="normalised-version"/>
+    <xsl:template match="TEI//body//sic" mode="normalised-version"/>
+    <xsl:template match="TEI//body//certainty" mode="normalised-version"/>
+    
+    <!-- - - - -VERSION DIPLOMATIQUE - - - - -->
+    <xsl:template match="TEI//body//p/seg" mode="original-version"></xsl:template>
     
     <!-- OCCURRENCES PERSONNAGES -->
     <xsl:template name="textometry-perso">
