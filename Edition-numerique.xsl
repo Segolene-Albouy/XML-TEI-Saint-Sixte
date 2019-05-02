@@ -121,7 +121,36 @@
                     <title>
                         <xsl:value-of select="concat($title, ' | ', 'Édition')"/>
                     </title>
-                    <style>
+                </head>
+                <body>
+                    <xsl:call-template name="navbar"/>
+                    <div class="container p-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2>Transcription diplomatique</h2>
+                                <xsl:apply-templates select="TEI//body//p" mode="original-version"/>
+                            </div>
+                            <div class="col-md-6">
+                                <h2>Transcription modernisée</h2>
+                                <xsl:apply-templates select="TEI//body//p" mode="normalised-version"/>
+                            </div>
+                        </div>
+                    </div>
+                </body>
+            </html>
+        </xsl:result-document>
+
+        <!--  PAGE TEXTOMETRIE -->
+        <xsl:result-document href="{$path-textometry}" method="html" indent="yes">
+            <html>
+                <head>
+                    <xsl:call-template name="meta-header"/>
+                    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"/>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"/>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"/>
+                    
+                    <!-- Tentative de faire des super popUp :'( -->
+                    <!--<style>
                         /* Popup container - can be anything you want */
                         .popup {
                         position: relative;
@@ -179,33 +208,8 @@
                         to {opacity:1 ;}
                         }
                     </style>
-                </head>
-                <body>
-                    <xsl:call-template name="navbar"/>
-                    <div class="container p-4">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h2>Transcription diplomatique</h2>
-                                <xsl:apply-templates select="TEI//body//p" mode="original-version"/>
-                            </div>
-                            <div class="col-md-6">
-                                <h2>Transcription modernisée</h2>
-                                <xsl:apply-templates select="TEI//body//p" mode="normalised-version"/>
-                            </div>
-                        </div>
-                    </div>
-                </body>
-            </html>
-        </xsl:result-document>
-
-        <!--  PAGE TEXTOMETRIE -->
-        <xsl:result-document href="{$path-textometry}" method="html" indent="yes">
-            <html>
-                <head>
-                    <xsl:call-template name="meta-header"/>
-                    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"/>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"/>
-                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"/>
+                    <xsl:apply-templates select="TEI//body//persName" mode="script"/>-->
+                    
                     <title>
                         <xsl:value-of select="concat($title, ' | ', 'Index textométrique')"/>
                     </title>
@@ -610,63 +614,15 @@
     </xsl:template>
     
     <xsl:template match="TEI//body//persName" mode="normalised-version">
-        <xsl:variable name="pers-Id">
-            <xsl:value-of select="replace(@ref, '#', '')"/>
-        </xsl:variable>
-        <xsl:variable name="persId">
-            <xsl:value-of select="replace($pers-Id, '-', '')"/>
-        </xsl:variable>
-        <xsl:variable name="persDesc">
-            <xsl:value-of select="ancestor::TEI/teiHeader//listPerson/person[@xml:id=$persId]/note//text()"/>
-        </xsl:variable>
-        <span class="badge badge-light popup">
+        <span class="badge badge-light badge-pill">
             <xsl:apply-templates mode="normalised-version"/>
-            <xsl:if test="@ref">
-                <span class="popuptext" id="{$persId}">
-                    <xsl:value-of select="$persDesc"/>
-                </span>
-            </xsl:if>
         </span>
-        
-        <script>
-            var placeId = <xsl:value-of select="$persId"/>
-            function popUp() {
-                window.addEventListener("DOMContentLoaded", (event) => {
-                    var popup = document.getElementById(placeId);
-                    popup.classList.toggle("show");
-                });
-            }
-        </script>
     </xsl:template>
     
     <xsl:template match="TEI//body//placeName" mode="normalised-version">
-        <xsl:variable name="place-Id">
-            <xsl:value-of select="replace(@ref, '#', '')"/>
-        </xsl:variable>
-        <xsl:variable name="placeId">
-            <xsl:value-of select="replace($place-Id, '-', '')"/>
-        </xsl:variable>
-        <xsl:variable name="placeDesc">
-            <xsl:value-of select="ancestor::TEI/teiHeader//listPlace/place[@xml:id=$place-Id]/note[1]//text()"/>
-        </xsl:variable>
-        <span class="badge badge-light popup" onclick="popUp()">
+        <span class="badge badge-light badge-pill">
             <xsl:apply-templates mode="normalised-version"/>
-            <xsl:if test="@ref">
-                <span class="popuptext" id="{$placeId}">
-                    <xsl:value-of select="$placeDesc"/>
-                </span>
-            </xsl:if>
         </span>
-        
-        <script>
-            var placeId = <xsl:value-of select="$placeId"/>
-            function popUp() {
-                window.addEventListener("DOMContentLoaded", (event) => {
-                    var popup = document.getElementById(placeId);
-                    popup.classList.toggle("show");
-                });
-            }
-        </script>
     </xsl:template>
     
     <xsl:template match="TEI//body//g" mode="normalised-version">
@@ -800,63 +756,15 @@
     </xsl:template>
     
     <xsl:template match="TEI//body//persName" mode="original-version">
-        <xsl:variable name="pers-Id">
-            <xsl:value-of select="replace(@ref, '#', '')"/>
-        </xsl:variable>
-        <xsl:variable name="persId">
-            <xsl:value-of select="replace($pers-Id, '-', '')"/>
-        </xsl:variable>
-        <xsl:variable name="persDesc">
-            <xsl:value-of select="ancestor::TEI/teiHeader//listPerson/person[@xml:id=$persId]/note//text()"/>
-        </xsl:variable>
-        <span class="badge badge-light popup">
+        <span class="badge badge-light badge-pill">
             <xsl:apply-templates mode="original-version"/>
-            <xsl:if test="@ref">
-                <span class="popuptext" id="{$persId}">
-                    <xsl:value-of select="$persDesc"/>
-                </span>
-            </xsl:if>
         </span>
-        
-        <script>
-            var placeId = <xsl:value-of select="$persId"/>
-            function popUp() {
-            window.addEventListener("DOMContentLoaded", (event) => {
-            var popup = document.getElementById(placeId);
-            popup.classList.toggle("show");
-            });
-            }
-        </script>
     </xsl:template>
     
     <xsl:template match="TEI//body//placeName" mode="original-version">
-        <xsl:variable name="place-Id">
-            <xsl:value-of select="replace(@ref, '#', '')"/>
-        </xsl:variable>
-        <xsl:variable name="placeId">
-            <xsl:value-of select="replace($place-Id, '-', '')"/>
-        </xsl:variable>
-        <xsl:variable name="placeDesc">
-            <xsl:value-of select="ancestor::TEI/teiHeader//listPlace/place[@xml:id=$place-Id]/note[1]//text()"/>
-        </xsl:variable>
-        <span class="badge badge-light popup" onclick="popUp()">
+        <span class="badge badge-light badge-pill">
             <xsl:apply-templates mode="original-version"/>
-            <xsl:if test="@ref">
-                <span class="popuptext" id="{$placeId}">
-                    <xsl:value-of select="$placeDesc"/>
-                </span>
-            </xsl:if>
         </span>
-        
-        <script>
-            var placeId = <xsl:value-of select="$placeId"/>
-            function popUp() {
-            window.addEventListener("DOMContentLoaded", (event) => {
-            var popup = document.getElementById(placeId);
-            popup.classList.toggle("show");
-            });
-            }
-        </script>
     </xsl:template>
     
     <xsl:template match="TEI//body//g" mode="original-version">
@@ -935,16 +843,22 @@
         </xsl:if>
     </xsl:template>
     
+    <!--<xsl:template match="TEI//body//persName" mode="script">
+        <xsl:variable name="persId" select="replace(@ref, '#', '')"/>
+        <xsl:variable name="line-number" select="ancestor-or-self::seg/replace(@facs, '#l', '')"/>
+        <xsl:variable name="tagId" select="concat($persId, $line-number)"/>
+        
+        <script>
+            var placeId = <xsl:value-of select="$tagId"/>
+            function popUp() {
+                var popup = document.getElementById(placeId);
+                popup.classList.toggle("show");
+            }
+        </script>
+    </xsl:template>-->
+    
     <xsl:template match="TEI//body//persName" mode="edited-text">
-        <xsl:value-of
-            select="
-            text() |
-            .//reg/text() |
-            .//corr/text()|
-            .//expan//text() |
-            .//seg//text() |
-            .//g/text()"
-        />
+        <xsl:apply-templates mode="normalised-version"/>
     </xsl:template>
     
     <xsl:template match="TEI//body//persName" mode="perso">
@@ -969,7 +883,7 @@
         <xsl:variable name="line">
             <!-- ancestor-or-self:: permet d'avoir le plus proche parent correspondant à ce noeud -->
             <xsl:value-of>
-                <xsl:apply-templates select=" ancestor-or-self::seg" mode="edited-text"/>
+                <xsl:apply-templates select=" ancestor-or-self::seg" mode="normalised-version"/>
             </xsl:value-of>
         </xsl:variable>
         
@@ -982,10 +896,21 @@
             <xsl:value-of select="ancestor-or-self::seg/@facs"/>
         </xsl:variable>
         
+        <!-- Tant pis pour le super popUp :'( -->
+        <!--<xsl:variable name="persId" select="replace(@ref, '#', '')"/>
+        <xsl:variable name="line-number" select="ancestor-or-self::seg/replace(@facs, '#l', '')"/>
+        <xsl:variable name="tagId" select="concat($persId, $line-number)"/>-->
+        
+        <!--<span class="badge badge-light popup" onclick="popUp()">-->
         <span class="badge badge-light" onclick="alert('{$line-bug}')">
             <xsl:text> (l. </xsl:text>
             <xsl:value-of select="replace($line-number, '#l', '')"/>
             <xsl:text>)</xsl:text>
+            <!--<xsl:if test="@ref">
+                <span class="popuptext" id="{$tagId}">
+                    <xsl:value-of select="$line"/>
+                </span>
+            </xsl:if>-->
         </span>
         
         <xsl:choose>
@@ -1059,15 +984,7 @@
     </xsl:template>
     
     <xsl:template match="TEI//body//placeName" mode="edited-text">
-            <xsl:value-of
-                select="
-                text() |
-                .//reg/text() |
-                .//corr/text()|
-                .//expan//text() |
-                .//seg//text() |
-                .//g/text()"
-            />
+        <xsl:apply-templates mode="normalised-version"/>
     </xsl:template>
     
     <xsl:template match="TEI//body//placeName" mode="place">
