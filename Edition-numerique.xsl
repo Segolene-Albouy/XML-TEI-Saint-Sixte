@@ -79,33 +79,42 @@
                                     select="$library"/></p>
                         </div>
 
-                        <div class="row text-center" style="place-content: center">
-                            <div class="col-md-2">
-                                <button type="button" class="btn btn-warning">
+                        <div class="container">
+                            <div class="row text-center" style="place-content: center; padding: 1em">
+                                <div class="col-md-2">
+                                <button type="button" class="btn btn-light">
                                     <a href="{$path-edition}" style="color: black;">Transcription du manuscrit</a>
                                 </button>
                             </div>
                             <div class="col-md-2">
-                                <button type="button" class="btn btn-warning">
+                                <button type="button" class="btn btn-light">
                                     <a href="{$path-facsimile}" style="color: black;">Fac-similé
                                         interactif</a>
                                 </button>
                             </div>
                             <div class="col-md-2">
-                                <button type="button" class="btn btn-warning">
+                                <button type="button" class="btn btn-light">
                                     <a href="{$path-textometry}" style="color: black;">Analyse
                                         textométrique</a>
                                 </button>
                             </div>
-                            <div class="col-md-2">
-                                <button type="button" class="btn btn-warning">
+                            </div>
+                            <div class="row text-center" style="place-content: center; padding: 1em">
+                                <div class="col-md-2">
+                                <button type="button" class="btn btn-light">
                                     <a href="{$path-catalogue-record}" style="color: black;">Notice du manuscrit</a>
                                 </button>
                             </div>
                             <div class="col-md-2">
-                                <button type="button" class="btn btn-warning">
+                                <button type="button" class="btn btn-light">
                                     <a href="{$path-biblio}" style="color: black;">Bibliographie sélective</a>
                                 </button>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-light">
+                                    <a href="{$path-about}" style="color: black;">À propos du projet</a>
+                                </button>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -472,6 +481,12 @@
             
             nav {
                 font-family: 'Ubuntu', serif;
+            }
+            
+            .btn-light {
+                font-family: 'Ubuntu', serif;
+                padding: 1em;
+                border: 1em;
             }
             
         </style>
