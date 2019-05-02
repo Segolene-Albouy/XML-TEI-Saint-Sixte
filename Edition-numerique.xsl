@@ -456,6 +456,7 @@
         <meta name="keywords" content="XSLT,XML,TEI"/>
         
         <link rel="icon" type="image/png" href="IMAGE/favicon.png" />
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"></link>
         
         <style>
             @font-face {
@@ -466,8 +467,13 @@
             }
             
             body {
-            font-family: 'symbolaregular';
+                font-family: 'symbolaregular';
             }
+            
+            nav {
+                font-family: 'Ubuntu', serif;
+            }
+            
         </style>
         <!--
             url('FONT/symbola-webfont.woff') format('woff'),
