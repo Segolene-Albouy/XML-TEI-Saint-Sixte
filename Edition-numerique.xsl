@@ -468,11 +468,9 @@
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"></link>
         
         <style>
-            @font-face {
-            font-family: 'symbolaregular';
-            src: 
-                url('FONT/symbola-webfont.woff') format('woff'),
-                url('FONT/symbola-webfont.woff2') format('woff2');
+            @font-face{
+            font-family : "symbolaregular";
+            src : url('FONT/Symbola.ttf');
             }
             
             body {
@@ -1588,19 +1586,19 @@
 
     <!-- Original version -->
 
-    <xsl:template match="abbr | abbr">
+    <xsl:template match="abbr">
         <span class="choice abbr">
             <xsl:apply-templates/>
         </span>
     </xsl:template>
 
-    <xsl:template match="orig | orig">
+    <xsl:template match="orig ">
         <span class="choice orig">
             <xsl:apply-templates/>
         </span>
     </xsl:template>
 
-    <xsl:template match="sic | sic">
+    <xsl:template match="sic ">
         <span class="choice sic">
             <xsl:apply-templates/>
         </span>
@@ -1608,19 +1606,19 @@
 
     <!-- Regularized version -->
 
-    <xsl:template match="reg | reg">
+    <xsl:template match="reg ">
         <span class="choice reg">
             <xsl:apply-templates/>
         </span>
     </xsl:template>
 
-    <xsl:template match="expan | expan">
+    <xsl:template match="expan">
         <span class="choice expan">
             <xsl:apply-templates/>
         </span>
     </xsl:template>
 
-    <xsl:template match="corr | corr">
+    <xsl:template match="corr">
         <span class="choice corr">
             <xsl:apply-templates/>
         </span>
@@ -1628,7 +1626,7 @@
 
     <!-- Not shown -->
 
-    <xsl:template match="certainty | certainty">
+    <xsl:template match="certainty">
         <span class="certainty">
             <xsl:apply-templates/>
         </span>
