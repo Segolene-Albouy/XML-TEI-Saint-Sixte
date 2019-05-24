@@ -160,7 +160,7 @@
                     
                     <!-- Tentative de faire des super popUp :'( -->
                     <!--<style>
-                        /* Popup container - can be anything you want */
+                        /* Popup container */
                         .popup {
                         position: relative;
                         display: inline-block;
@@ -488,13 +488,7 @@
             }
             
         </style>
-        <!--
-            url('FONT/symbola-webfont.woff') format('woff'),
-            url('FONT/symbola-webfont.woff'2) format('woff2');
-            
-            url('FONT/symbola_hinted-webfont.woff') format('woff'),
-            url('FONT/symbola_hinted-webfont.woff2') format('woff2');
-        -->
+
     </xsl:template>
 
     <!-- Séparateur de liste -->
@@ -810,7 +804,7 @@
     <!-- OCCURRENCES PERSONNAGES -->
     <xsl:template name="textometry-perso">
         <h1>Listes de personnages</h1>
-        <small class="text-muted">Cliquez sur le numéro de ligne d'une occurence pour afficher le
+        <small class="text-muted">Cliquez sur le numéro de ligne d'une occurrence pour afficher le
             contexte textuel où elle appararaît.</small>
 
         <xsl:apply-templates select="//listPerson//person" mode="perso"/>
@@ -822,7 +816,7 @@
             <xsl:value-of select="./@xml:id"/>
         </xsl:variable>
         
-        <xsl:variable name="nb-occurence">
+        <xsl:variable name="nb-occurrence">
             <xsl:value-of
                 select="count(ancestor::TEI//body//persName[replace(@ref, '#', '') = $idPerson])"
             />
@@ -836,13 +830,13 @@
                     <xsl:value-of select="./persName//text()"/>
                     <xsl:text>  </xsl:text>
                     <span class="badge badge-light">
-                        <xsl:value-of select="$nb-occurence"/>
+                        <xsl:value-of select="$nb-occurrence"/>
                         <xsl:choose>
-                            <xsl:when test="$nb-occurence = 1">
-                                <xsl:text> occurence</xsl:text>
+                            <xsl:when test="$nb-occurrence = 1">
+                                <xsl:text> occurrence</xsl:text>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:text> occurences</xsl:text>
+                                <xsl:text> occurrences</xsl:text>
                             </xsl:otherwise>
                         </xsl:choose>
                     </span>
@@ -953,7 +947,7 @@
     <!-- OCCURRENCES LIEUX -->
     <xsl:template name="textometry-place">
         <h1>Listes de lieux</h1>
-        <small class="text-muted">Cliquez sur le numéro de ligne d'une occurence pour afficher le
+        <small class="text-muted">Cliquez sur le numéro de ligne d'une occurrence pour afficher le
             contexte textuel où elle apparaît.</small>
 
         <xsl:apply-templates select="//listPlace//place"/>
@@ -965,7 +959,7 @@
             <!-- je récupère son id -->
             <xsl:value-of select="./@xml:id"/>
         </xsl:variable>
-        <xsl:variable name="nb-occurence">
+        <xsl:variable name="nb-occurrence">
             <xsl:value-of
                 select="count(ancestor::TEI//body//placeName[replace(@ref, '#', '') = $idPlace])"
             />
@@ -978,13 +972,13 @@
                     <xsl:value-of select="./placeName//text()"/>
                     <xsl:text>  </xsl:text>
                     <span class="badge badge-light">
-                        <xsl:value-of select="$nb-occurence"/>
+                        <xsl:value-of select="$nb-occurrence"/>
                         <xsl:choose>
-                            <xsl:when test="$nb-occurence = 1">
-                                <xsl:text> occurence</xsl:text>
+                            <xsl:when test="$nb-occurrence = 1">
+                                <xsl:text> occurrence</xsl:text>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:text> occurences</xsl:text>
+                                <xsl:text> occurrences</xsl:text>
                             </xsl:otherwise>
                         </xsl:choose>
                     </span>
@@ -1074,7 +1068,7 @@
             <xsl:value-of select="./@xml:id"/>
         </xsl:variable>
         
-        <xsl:variable name="nb-occurence">
+        <xsl:variable name="nb-occurrence">
             <xsl:value-of
                 select="count(ancestor::TEI//body//said[replace(@who, '#', '') = $idPerson])"/>
         </xsl:variable>
@@ -1088,9 +1082,9 @@
                     <xsl:value-of select="./persName//text()"/>
                     <xsl:text>  </xsl:text>
                     <span class="badge badge-light">
-                        <xsl:value-of select="$nb-occurence"/>
+                        <xsl:value-of select="$nb-occurrence"/>
                         <xsl:choose>
-                            <xsl:when test="$nb-occurence = 1">
+                            <xsl:when test="$nb-occurrence = 1">
                                 <xsl:text> prise de parole</xsl:text>
                             </xsl:when>
                             <xsl:otherwise>
