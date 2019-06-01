@@ -6,7 +6,7 @@ Le fichier de transformation `XSLT` propose pour les fichiers `XML TEI` conforme
 - **Accueil** : bannière reprenant la reproduction du premier folio du manuscrit édité ainsi qu'un court paragraphe de présentation de la présente édition ;
 - **Transcription** : affichage comparé entre une transcription du manuscrit diplomatique et une modernisée ;
 - **Facsimilé interactif** : édition du texte associée à la reproduction graphique du manuscrit, avec le choix entre une version de la transcription au plus près du texte, et une version à la graphie modernisée. Vous pourrez trouver de plus amples informations sur le *repository* [Interfaxim](https://github.com/TimotheAlbouy/Interfaxim) ;
-- **Analyse textométrique** : un onglet recensant toutes les occurences dans le texte de mention de personnages, un onglet pour les occurences de lieux et un dernier onglet listant toutes les prises de paroles par personnage ;
+- **Analyse de fréquence** : un onglet recensant toutes les occurences dans le texte de mention de personnages, un onglet pour les occurences de lieux et un dernier onglet listant toutes les prises de paroles par personnage ;
 - **Notice** : description matérielle et bibliographique du manuscrit édité ;
 - **Bibliographie** : liste des références bibliographiques mentionnant le manuscrit édité ;
 - **À propos** : page à configurer pour donner des détails concernant le projet de l'édition.

@@ -427,7 +427,7 @@
                     <a class="nav-link" href="{$path-facsimile}">Fac-similé</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{$path-textometry}">Textométrie</a>
+                    <a class="nav-link" href="{$path-textometry}">Analyse textuelle</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{$path-catalogue-record}">Notice</a>
