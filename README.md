@@ -1,5 +1,5 @@
 # Edition numérique
-Ce projet consiste en l'édition en `XML TEI` de la vie de saint Sixte (folios 87ra à 88va) du manuscrit [Français 412](https://archivesetmanuscrits.bnf.fr/ark:/12148/cc50522d) conservé à la Bibliothèque nationale de France et disponible en [version numérisée](https://gallica.bnf.fr/ark:/12148/btv1b84259980/f183.image). Une version en ligne de cette édition existe à l'adresse suivante : [edition-saint-sixte](http://edition-saint-sixte.alwaysdata.net/)
+Ce projet consiste en l'édition en `XML TEI` de la vie de saint Sixte (folios 87ra à 88va) du manuscrit [Français 412](https://archivesetmanuscrits.bnf.fr/ark:/12148/cc50522d) conservé à la Bibliothèque nationale de France et disponible en [version numérisée](https://gallica.bnf.fr/ark:/12148/btv1b84259980/f183.image). Une version en ligne de cette édition existe à l'adresse suivante : [edition-saint-sixte](https://segolene-albouy.github.io/)
 
 ## Transformation `XSLT`
 Le fichier de transformation `XSLT` propose pour les fichiers `XML TEI` conformes au [schéma Relax NG](https://github.com/Segolene-Albouy/Edition_numerique_saint-Sixte/blob/master/DOCUMENTATION/ODD-Sixte.rng) fourni, une sortie automatique en six [fichiers HMTL](https://github.com/Segolene-Albouy/Edition_numerique_saint-Sixte/tree/master/HTML) :
